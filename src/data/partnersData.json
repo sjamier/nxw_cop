@@ -2,7 +2,7 @@
   "partners": [
     {
       "name": "Nexway",
-      "logo": "http://partnersdemo.nexway.com/partners/nexway/store/170627/img/brand_logo.png",
+      "logo": "../img/brand_logo.svg",
       "sitetype": "STORE",
       "versions": [
         {

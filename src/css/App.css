@@ -1,164 +1,53 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-body, html, ul, li {
-  padding: 0;
-  margin: 0; }
+body, html, ul, li { padding: 0; margin: 0; }
 
-ul, li {
-  list-style: none; }
+ul, li { list-style: none; }
 
-body {
-  font-family: 'Open Sans', Arial, sans-serif;
-  background-color: #f7f7f7; }
+body { font-family: 'Open Sans', Arial, sans-serif; background-color: #f7f7f7; }
 
-.header {
-  max-height: 340px;
-  margin-top: 15px;
-  overflow: hidden;
-  position: relative; }
-  .header img {
-    max-width: 150%;
-    position: absolute;
-    top: -80px;
-    left: -20px; }
-  .header h1 {
-    font-size: 30px;
-    font-weight: 500;
-    color: #fff;
-    padding: 10px 10px 0;
-    margin: 0;
-    position: relative;
-    float: left; }
-    .header h1 .f-letter {
-      float: left;
-      clear: left; }
+.header { max-height: 340px; margin-top: 15px; overflow: hidden; position: relative; }
+.header img { max-width: 150%; position: absolute; top: -80px; left: -20px; }
+.header h1 { font-size: 30px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left; }
+.header h1 .f-letter { float: left; clear: left; }
 
-.partners {
-  max-width: 1500px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly; }
+.partners { max-width: 1500px; }
+.partners > ul { margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-evenly; }
 
-.partner {
-  margin-bottom: 10px;
-  background-color: #DDD;
-  border-radius: 2px;
-  display: flex;
-  flex: 0 1 90%;
-  position: relative; }
+.partner { margin-bottom: 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
 
-.partnerHeader {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1; }
-  .partnerHeader img {
-    width: auto;
-    max-width: 100%;
-    max-height: 50px;
-    padding: 10px;
-    align-self: center; }
+.partnerHeader { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.partnerHeader img { width: auto; max-width: 100%; max-height: 50px; padding: 10px; align-self: center; }
 
-.partnerId {
-  font-size: 10px;
-  padding: 2px 10px;
-  margin-top: 10px;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; }
+.partnerId { font-size: 10px; padding: 2px 10px; margin-top: 10px; flex: 1; display: flex; justify-content: center; align-items: flex-end; }
 
-.partnerType {
-  font-size: 8px;
-  color: #fff;
-  line-height: 1em;
-  padding: 4px 10px;
-  margin-left: -10px;
-  background-color: #732673;
-  border-radius: 2px;
-  position: absolute;
-  top: 5px;
-  left: 5px; }
+.partnerType { font-size: 8px; color: #fff; line-height: 1em; padding: 4px 10px; margin-left: -10px; background-color: #732673; border-radius: 2px; position: absolute; top: 5px; left: 5px; }
 
-.versions {
-  list-style-type: none;
-  margin: 0;
-  display: inline-block;
-  vertical-align: middle;
-  display: none; }
+.versions { list-style-type: none; margin: 0; vertical-align: middle; display: none; }
 
-.version {
-  margin: 0 10px 0 0;
-  background-color: #AAA;
-  border-radius: 3px;
-  box-shadow: 2px 2px 2px #555;
-  display: inline-block;
-  overflow: hidden; }
-  .version a {
-    font-size: 12px;
-    text-decoration: none; }
-  .version a > * {
-    display: inline-block; }
+.version { margin: 0 10px 0 0; background-color: #AAA; border-radius: 3px; box-shadow: 2px 2px 2px #555; display: inline-block; overflow: hidden; }
+.version a { font-size: 12px; text-decoration: none; }
+.version a > * { display: inline-block; }
 
-.versionDate {
-  color: #000;
-  padding: 2px 3px 4px 8px; }
+.versionDate { color: #000; padding: 2px 3px 4px 8px; }
 
-.versionStatus {
-  font-size: 11px;
-  font-weight: bold;
-  color: #FFF;
-  padding: 6px 7px 6px;
-  background-color: #000; }
-  .versionStatus.ok {
-    background-color: #183; }
-    .versionStatus.ok:before {
-      content: "OK"; }
-    .versionStatus.ok.old {
-      background-color: #061; }
-  .versionStatus.nok {
-    background-color: #911; }
-    .versionStatus.nok:before {
-      content: "NOK"; }
-  .versionStatus.wip {
-    background-color: #e82; }
-    .versionStatus.wip:before {
-      content: "WIP"; }
+.versionStatus { font-size: 11px; font-weight: bold; color: #FFF; padding: 6px 7px 6px; background-color: #000; }
+.versionStatus.ok { background-color: #183; }
+.versionStatus.ok:before { content: "OK"; }
+.versionStatus.ok.old { background-color: #061; }
+.versionStatus.nok { background-color: #911; }
+.versionStatus.nok:before { content: "NOK"; }
+.versionStatus.wip { background-color: #e82; }
+.versionStatus.wip:before { content: "WIP"; }
 
-.versionComment {
-  font-size: 10px;
-  color: #fff;
-  padding: 6px;
-  background-color: #000; }
+.versionComment { font-size: 10px; color: #fff; padding: 6px; background-color: #000; }
 
-@media (min-width: 600px) {
-  .header img {
-    max-width: 130%;
-    top: -140px;
-    left: 0; }
-
-  .partner {
-    flex: 0 1 40%; } }
-@media (min-width: 768px) {
-  .header img {
-    max-width: 130%;
-    top: -200px; }
-
-  .partner {
-    flex-basis: 30%; } }
-@media (min-width: 992px) {
-  .header img {
-    max-width: 130%;
-    top: -300px; }
-
-  .partner {
-    flex-basis: 22%; } }
-@media (min-width: 1200px) {
-  .header img {
-    max-width: 110%;
-    top: -300px; } }
-@media (min-width: 1400px) {
-  .partner {
-    flex-basis: 18%; } }
+@media (min-width: 600px) { .header img { max-width: 130%; top: -140px; left: 0; }
+  .partner { flex: 0 1 40%; } }
+@media (min-width: 768px) { .header img { max-width: 130%; top: -200px; }
+  .partner { flex-basis: 30%; } }
+@media (min-width: 992px) { .header img { max-width: 130%; top: -300px; }
+  .partner { flex-basis: 22%; } }
+@media (min-width: 1200px) { .header img { max-width: 110%; top: -300px; } }
+@media (min-width: 1400px) { .partner { flex-basis: 18%; } }
 
 /*# sourceMappingURL=App.css.map */
