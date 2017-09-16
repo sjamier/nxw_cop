@@ -1,50 +1,48 @@
-import React from 'react';
-import createReactClass from 'create-react-class';
+import React, { Component } from 'react';
 import PartnerItem from './PartnerItem';
-{/*import PartnersFilters from './PartnersFilters';*/}
+{/*import createReactClass from 'create-react-class';
+  import PartnersFilters from './PartnersFilters';*/}
 
-const PartnerTypeSelect = createReactClass ({
+class PartnerTypeSelect extends Component {
   onChange(e){
-    console.log(e.target.value);
     this.props.onFilterChange(e.target.value);
-  },
-
+  }
   render(){
     return(
-      <select id="partner-filter-type" onChange={this.onChange}>
-        <option value="ALL">ALL</option>
-        <option value="CART">CART</option>
-        <option value="STORE">STORE</option>
-      </select>
+      <div className="form-group">
+        <select id="partner-filter-type" name="partner-filter-type" onChange={this.onChange.bind(this)}>
+          <option value="TYPE">TYPE</option>
+          <option value="CART">CART</option>
+          <option value="STORE">STORE</option>
+        </select>
+      </div>
     )
-  },
-});
+  }
+}
 
-const PartnerNameSearchInput = createReactClass({
+class PartnerNameSearchInput extends Component {
   onChange(e){
-    console.log(e.target.value);
     this.props.onFilterChange(e.target.value);
-  },
+  }
   render(){
     return(
-      <input type="text" onChange={this.onChange} placeholder="Partner Name Search"/>
+      <input type="text" onChange={this.onChange.bind(this)} placeholder="Partner Name Search"/>
     )
-  },
-});
+  }
+}
 
-const Partners = createReactClass ({
-  getInitialState(){
-    return {
-      _partnerTypeFilter : "ALL",
+class Partners extends Component {
+  componentWillMount(){
+    this.setState({
+      _partnerTypeFilter : "TYPE",
       _partnerNameFilter : null
-    }
-  },
-
+    });
+  }
   render(){
     if (this.props.partners) {
       let partnerItems = this.props.partners
         .filter( partner => {
-          return this.state._partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state._partnerTypeFilter;
+          return this.state._partnerTypeFilter === "TYPE" ? partner : partner.sitetype === this.state._partnerTypeFilter;
         })
         .filter( partner => {
           return this.state._partnerNameFilter === null ? partner : partner.name.toLowerCase().includes(this.state._partnerNameFilter.toLowerCase());
@@ -55,9 +53,13 @@ const Partners = createReactClass ({
       return (
         <div className="partners">
           {/*<PartnersFilters partnersData={this.props.partners} />*/}
-          <h4>Filters</h4>
-          <PartnerTypeSelect onFilterChange={this.onFilterTypeChange}/>
-          <PartnerNameSearchInput onFilterChange={this.onFilterNameChange}/>
+          <div className="form-components filter-components">
+            <h4>Filters</h4>
+            <form id="filtersForm" action="GET" onSubmit={(e)=>{e.preventDefault();}}>
+              <PartnerTypeSelect onFilterChange={this.onFilterTypeChange.bind(this)}/>
+              <PartnerNameSearchInput onFilterChange={this.onFilterNameChange.bind(this)}/>
+            </form>
+          </div>
           <ul>
             {partnerItems}
           </ul>
@@ -66,11 +68,11 @@ const Partners = createReactClass ({
     } else {
       return (<h1>Can't load da sheet !</h1>);
     }
-  },
+  }
 
-  onFilterTypeChange(newVal){ this.setState({ _partnerTypeFilter : newVal }); },
-  onFilterNameChange(newVal){ this.setState({ _partnerNameFilter : newVal }); },
-  goToPartnerProfile(partner){ console.log("Going to "+partner.name+" profile"); },
-});
+  onFilterTypeChange(newVal){ this.setState({ _partnerTypeFilter : newVal }); }
+  onFilterNameChange(newVal){ this.setState({ _partnerNameFilter : newVal }); }
+  goToPartnerProfile(partner){ console.log("Going to "+partner.name+" profile"); }
+}
 
 export default Partners;

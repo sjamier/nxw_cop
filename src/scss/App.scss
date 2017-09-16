@@ -4,17 +4,34 @@
 body, html, ul, li { padding: 0; margin: 0;}
 ul, li { list-style: none;}
 
-body { font-family: 'Open Sans', Arial, sans-serif; background-color: #f7f7f7;}
-.header { max-height: 340px; margin-top: 15px; overflow: hidden; position: relative;
+body { font-family: 'Open Sans', Arial, sans-serif; max-width: none; background-color: #f7f7f7;}
+
+form { margin-top: 10px; display: flex; justify-content: space-between;
+  input[type="text"]{ height: 40px; flex: 1;}
+  select { font-size: 12px; padding: 9px 0 10px 8px;
+    option {
+      &:hover { background: #000;}
+    }
+  }
+  .form-group { margin: 0;}
+
+}
+input[type="text"]{ padding-left: 5px;}
+
+.header { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative;
   img { max-width: 150%; position: absolute; top: -80px; left: -20px;}
   h1 { font-size: 30px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left;
     .f-letter { float: left; clear: left;}
   }
 }
+.form-components { padding: 10px 20px 15px; border: 1px solid #aaa;
+  &.filter-components { margin-bottom: 20px;}
+  h4 { line-height: 1em; padding: 0 0 8px 0; margin: 0 0 12px; border-bottom: 1px solid #aaa;}
+}
 .partners { max-width: 1500px;
   > ul { margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-evenly;}
 }
-.partner { margin-bottom: 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative;}
+.partner { margin: 0 auto 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative;}
 .partnerHeader { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1;
   img { width: auto; max-width: 100%; max-height: 50px; padding: 10px; align-self: center;}
 }
@@ -43,7 +60,7 @@ body { font-family: 'Open Sans', Arial, sans-serif; background-color: #f7f7f7;}
 
 @media (min-width: 600px) {
   .header img { max-width: 130%; top: -140px; left: 0;}
-  .partner { flex: 0 1 40%;}
+  .partner { margin: 0 0 10px; flex: 0 1 47%;}
 }
 @media (min-width: 768px) {
   .header img { max-width: 130%; top: -200px;}
