@@ -7,7 +7,8 @@ class Partner extends Component {
     console.log(this.props.partner);
     return (
       <div className="partner-profile">
-        <PartnerBadge partner={this.props.partner} wrapTag="div"/>
+        <PartnerBadge partner={this.props.partner} wrapTag="div" />
+        <PartnerProfile  partner={this.props.partner} />
       </div>
     );
   }
