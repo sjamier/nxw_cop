@@ -5,34 +5,39 @@ ul, li { list-style: none; }
 
 body { font-family: 'Open Sans', Arial, sans-serif; max-width: none; background-color: #f7f7f7; }
 
-form { margin-top: 10px; display: flex; justify-content: space-between; }
-form input[type="text"] { height: 40px; flex: 1; }
-form select { font-size: 12px; padding: 9px 0 10px 8px; }
+form { margin-top: 5px; display: flex; justify-content: space-between; }
+form input[type="text"] { height: 40px; border: 1px solid #aaa; flex: 1; }
+form select { font-size: 12px; height: 40px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px; }
 form select option:hover { background: #000; }
 form .form-group { margin: 0; }
 
 input[type="text"] { padding-left: 5px; }
 
+#partners { max-width: 1500px; }
+
+.container .jumbotron { border-radius: 3px; }
+
 .header { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; }
 .header img { max-width: 150%; position: absolute; top: -80px; left: -20px; }
 .header h1 { font-size: 30px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left; }
-.header h1 .f-letter { float: left; clear: left; }
 
-.form-components { padding: 10px 20px 15px; border: 1px solid #aaa; }
+.form-components { padding: 10px 10px 15px; border: 1px solid #aaa; }
 .form-components.filter-components { margin-bottom: 20px; }
 .form-components h4 { line-height: 1em; padding: 0 0 8px 0; margin: 0 0 12px; border-bottom: 1px solid #aaa; }
 
-.partners { max-width: 1500px; }
-.partners > ul { margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+.partners > ul { display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+.partners > ul > li:hover { cursor: pointer; }
 
 .partner { margin: 0 auto 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
 
-.partnerHeader { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-.partnerHeader img { width: auto; max-width: 100%; max-height: 50px; padding: 10px; align-self: center; }
+.partner-header { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
 
-.partnerId { font-size: 10px; padding: 2px 10px; margin-top: 10px; flex: 1; display: flex; justify-content: center; align-items: flex-end; }
+.partner-logo { text-align: center; width: 90%; padding: 10px; align-self: center; flex: 4; display: flex; justify-content: center; }
+.partner-logo img { width: auto; max-width: 100%; max-height: 45px; align-self: center; }
 
-.partnerType { font-size: 8px; color: #fff; line-height: 1em; padding: 4px 10px; margin-left: -10px; background-color: #732673; border-radius: 2px; position: absolute; top: 5px; left: 5px; }
+.partner-id { font-size: 10px; padding: 2px 10px; margin-top: 10px; flex: 1; display: flex; justify-content: center; align-items: flex-end; }
+
+.partner-type { font-size: 8px; color: #fff; padding: 2px 10px 4px; margin-left: -10px; background-color: #732673; border-radius: 2px; position: absolute; top: 5px; left: 5px; }
 
 .versions { list-style-type: none; margin: 0; vertical-align: middle; display: none; }
 
@@ -40,20 +45,23 @@ input[type="text"] { padding-left: 5px; }
 .version a { font-size: 12px; text-decoration: none; }
 .version a > * { display: inline-block; }
 
-.versionDate { color: #000; padding: 2px 3px 4px 8px; }
+.version-date { color: #000; padding: 2px 3px 4px 8px; }
 
-.versionStatus { font-size: 11px; font-weight: bold; color: #FFF; padding: 6px 7px 6px; background-color: #000; }
-.versionStatus.ok { background-color: #183; }
-.versionStatus.ok:before { content: "OK"; }
-.versionStatus.ok.old { background-color: #061; }
-.versionStatus.nok { background-color: #911; }
-.versionStatus.nok:before { content: "NOK"; }
-.versionStatus.wip { background-color: #e82; }
-.versionStatus.wip:before { content: "WIP"; }
+.version-status { font-size: 11px; font-weight: bold; color: #FFF; padding: 6px 7px 6px; background-color: #000; }
+.version-status.ok { background-color: #183; }
+.version-status.ok:before { content: "OK"; }
+.version-status.ok.old { background-color: #061; }
+.version-status.nok { background-color: #911; }
+.version-status.nok:before { content: "NOK"; }
+.version-status.wip { background-color: #e82; }
+.version-status.wip:before { content: "WIP"; }
 
-.versionComment { font-size: 10px; color: #fff; padding: 6px; background-color: #000; }
+.version-comment { font-size: 10px; color: #fff; padding: 6px; background-color: #000; }
 
-@media (min-width: 600px) { .header img { max-width: 130%; top: -140px; left: 0; }
+@media (min-width: 600px) { .form-components { padding: 10px 20px 15px; display: flex; }
+  .form-components h4 { padding: 10px 20px 10px 0; margin: 5px 20px 0 0; border-bottom: none; border-right: 1px solid #aaa; }
+  .form-components form { flex: 4; }
+  .header img { max-width: 130%; top: -140px; left: 0; }
   .partner { margin: 0 0 10px; flex: 0 1 47%; } }
 @media (min-width: 768px) { .header img { max-width: 130%; top: -200px; }
   .partner { flex-basis: 30%; } }
