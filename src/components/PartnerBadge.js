@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
-import PartnerProfile from './PartnerProfile';
-
 class PartnerBadge extends Component {
   render() {
     const WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';

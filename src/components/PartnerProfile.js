@@ -19,7 +19,7 @@ class PartnerMockups extends Component {
   render() {
     let partnerMockupVersions = this.props.partner.versions
       .map(partnerMockupVersion => {
-        return(<PartnerMockup key={partnerMockupVersion.vdate} partnerMockupVersion={partnerMockupVersion} />);
+        return(<PartnerMockup key={partnerMockupVersion.vurl} partnerMockupVersion={partnerMockupVersion} />);
       }
     );
     return (
