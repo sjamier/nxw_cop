@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 class PartnerBadge extends Component {
   render() {
     let WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';
-    let wTagClick = this.props.wrapTag === 'li' ? '{`${this.onClick.bind(this)}`}':'';
     return (
       <WrapTag className="partner-badge" onClick={this.onClick.bind(this)}>
         <div className="partner-header">
