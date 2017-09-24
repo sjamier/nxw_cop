@@ -17,7 +17,7 @@ input[type="text"] { padding-left: 5px; }
 
 .container .jumbotron { border-radius: 3px; }
 
-.header { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; }
+.main > .header { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #8af url(../img/josh-sorenson-386148.jpg) no-repeat center; background-size: 100% auto; }
 .header img { max-width: 150%; position: absolute; top: -80px; left: -20px; }
 .header h1 { font-size: 30px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left; }
 
@@ -28,7 +28,7 @@ input[type="text"] { padding-left: 5px; }
 .partners > ul { display: flex; flex-wrap: wrap; justify-content: space-evenly; }
 .partners > ul > li:hover { cursor: pointer; }
 
-.partner { margin: 0 auto 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
+.partner-badge { margin: 0 auto 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
 
 .partner-header { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
 
@@ -39,15 +39,19 @@ input[type="text"] { padding-left: 5px; }
 
 .partner-type { font-size: 8px; color: #fff; padding: 2px 10px 4px; margin-left: -10px; background-color: #732673; border-radius: 2px; position: absolute; top: 5px; left: 5px; }
 
-.versions { list-style-type: none; margin: 0; vertical-align: middle; }
+.mockups_section { width: 25%; }
 
-.version { margin: 0 10px 0 0; background-color: #AAA; border-radius: 3px; box-shadow: 2px 2px 2px #555; display: inline-block; overflow: hidden; }
-.version a { font-size: 12px; text-decoration: none; }
-.version a > * { display: inline-block; }
+.versions { list-style-type: none; margin: 0; vertical-align: middle; display: flex; flex-direction: column; }
 
-.version-date { color: #000; padding: 2px 3px 4px 8px; }
+.version { min-height: 40px; margin: 0 0 10px; background-color: #e9e9e9; display: flex; }
+.version:hover { background-color: #fff; border: 1px solid #ddd; }
+.version:hover .version-comment { color: #666; }
+.version a { font-size: 14px; text-decoration: none; flex-grow: 1; display: flex; justify-content: space-between; }
+.version a > * { padding: 5px 8px; display: flex; align-items: center; }
 
-.version-status { font-size: 11px; font-weight: bold; color: #FFF; padding: 6px 7px 6px; background-color: #000; }
+.version-date { color: #000; line-height: 1em; }
+
+.version-status { font-size: 11px; font-weight: bold; color: #FFF; background-color: #000; }
 .version-status.ok { background-color: #183; }
 .version-status.ok:before { content: "OK"; }
 .version-status.ok.old { background-color: #061; }
@@ -56,18 +60,18 @@ input[type="text"] { padding-left: 5px; }
 .version-status.wip { background-color: #e82; }
 .version-status.wip:before { content: "WIP"; }
 
-.version-comment { font-size: 10px; color: #fff; padding: 6px; background-color: #000; }
+.version-comment { font-size: 10px; color: #679; background-color: rgba(0, 0, 0, 0.04); border-left: 1px solid #fff; flex-grow: 1; flex-shrink: 1; }
 
 @media (min-width: 600px) { .form-components { padding: 10px 20px 15px; display: flex; }
   .form-components h4 { padding: 10px 20px 10px 0; margin: 5px 20px 0 0; border-bottom: none; border-right: 1px solid #aaa; }
   .form-components form { flex: 4; }
   .header img { max-width: 130%; top: -140px; left: 0; }
-  .partner { margin: 0 0 10px; flex: 0 1 47%; } }
+  .partner-badge { margin: 0 0 10px; flex: 0 1 47%; } }
 @media (min-width: 768px) { .header img { max-width: 130%; top: -200px; }
-  .partner { flex-basis: 30%; } }
+  .partner-badge { flex-basis: 30%; } }
 @media (min-width: 992px) { .header img { max-width: 130%; top: -300px; }
-  .partner { flex-basis: 22%; } }
+  .partner-badge { flex-basis: 22%; } }
 @media (min-width: 1200px) { .header img { max-width: 110%; top: -300px; } }
-@media (min-width: 1400px) { .partner { flex-basis: 18%; } }
+@media (min-width: 1400px) { .partner-badge { flex-basis: 18%; } }
 
 /*# sourceMappingURL=App.css.map */

@@ -25,7 +25,7 @@ class PartnerNameSearchInput extends Component {
 
 class Partners extends Component {
   componentWillMount(){
-    this.props.partners.forEach( partner => { this.props._partnerTypes.indexOf(partner.sitetype) === -1 ? this.props._partnerTypes.push(partner.sitetype):null;} );
+    this.props.partners.forEach( partner => { if (this.props._partnerTypes.indexOf(partner.sitetype) === -1) this.props._partnerTypes.push(partner.sitetype);} );
     this.setState({
       _partnerTypeFilter : "TYPE",
       _partnerNameFilter : null,

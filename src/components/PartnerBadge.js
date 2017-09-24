@@ -3,9 +3,10 @@ import { withRouter } from 'react-router';
 
 class PartnerBadge extends Component {
   render() {
-    const WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';
+    let WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';
+    let wTagClick = this.props.wrapTag === 'li' ? '{`${this.onClick.bind(this)}`}':'';
     return (
-      <WrapTag className="partner" onClick={this.onClick.bind(this)}>
+      <WrapTag className="partner-badge" onClick={this.onClick.bind(this)}>
         <div className="partner-header">
           <div className="partner-logo"><img src={this.props.partner.logo} alt={this.props.partner.name} /></div>
           <h2 className="partner-id">{this.props.partner.name}</h2>

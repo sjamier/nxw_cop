@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import BgImg from './img/john-towner-128480.jpg';
 import Partners from './components/Partners';
 import Partner from './components/Partner';
 import partnersDataFile from './data/partnersData.json';
+{/*import BgImg from './img/josh-sorenson-386148.jpg';*/}
 
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
         const PartnerSection = () => {
           console.log("building route for : "+partner.name);
           return (
-            <Partner partner={ partner }/>
+            <Partner partner={partner}/>
           );
         }
         return ( <Route key={partner.name} path={`/${partner.name}/`} partner={partner} component={ PartnerSection } /> ); })
@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     const PartnersList = () => {
       return (
-        <Partners partners={ this.state.partnersData.partners } />
+        <Partners partners={this.state.partnersData.partners} />
       );
     }
 
@@ -37,8 +37,8 @@ class App extends Component {
       <Router>
         <div className="container main" data-reactroot="root">
           <div className="header jumbotron">
-            <img src={ BgImg } alt="Nexway Onboarding" />
-            <h1><span className="f-letter">C</span>ustomer <span className="f-letter">O</span>nboarding <span className="f-letter">P</span>rogress</h1>
+            {/*<img src={ BgImg } alt="Nexway Onboarding" />*/}
+            <h1><span className="f-letter">C</span>astor <span className="f-letter">O</span>nboarding <span className="f-letter">P</span>artners</h1>
           </div>
           <Switch>
             <Route exact path="/" render={ PartnersList }/>
