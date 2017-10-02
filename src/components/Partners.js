@@ -10,7 +10,7 @@ class PartnerTypeSelect extends Component {
     return (
       <div className="form-group">
         <select id="partner-filter-type" name="partner-filter-type" onChange={this.onChange.bind(this)}>
-          <option value="TYPE">TYPE</option>
+          <option value="ALL">ALL</option>
           { thisOptions }
         </select>
       </div>
@@ -24,26 +24,35 @@ class PartnerNameSearchInput extends Component {
 }
 
 class Partners extends Component {
-  componentWillMount(){
-    this.props.partners.forEach( partner => { if (this.props._partnerTypes.indexOf(partner.sitetype) === -1) this.props._partnerTypes.push(partner.sitetype);} );
-    this.setState({
-      _partnerTypeFilter : "TYPE",
-      _partnerNameFilter : null,
+  constructor() {
+    super();
+    this.state = ({
+        _partnerTypes : [],
+        _partnerTypeFilter : "ALL",
+        _partnerNameFilter : "",
     });
-
+  }
+  componentWillMount(){
+    console.log("this.props.partners : "+this.props.partners);
+  }
+  componentDidMount(){
   }
   render(){
+    this.props.partners.forEach( partner => {
+      console.log("partner.sitetype : "+partner.sitetype);
+      if (this.state._partnerTypes.indexOf(partner.sitetype) === -1) this.state._partnerTypes.push(partner.sitetype);
+    });
     const PartnersBadges = this.props.partners
-      .filter( partner => { return this.state._partnerTypeFilter === "TYPE" ? partner : partner.sitetype === this.state._partnerTypeFilter; })
-      .filter( partner => { return this.state._partnerNameFilter === null ? partner : partner.name.toLowerCase().includes(this.state._partnerNameFilter.toLowerCase()); })
+      .filter( partner => { return this.state._partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state._partnerTypeFilter; })
+      .filter( partner => { return this.state._partnerNameFilter === "" ? partner : partner.name.toLowerCase().includes(this.state._partnerNameFilter.toLowerCase()); })
       .map( partner => { return ( <PartnerBadge key={partner.name} partner={partner} wrapTag="li"/> ); });
-    console.log("NbResults: "+PartnersBadges.length);
+    console.log("NbResults: "+PartnersBadges.length+"   - this.state._partnerTypes : "+this.state._partnerTypes);
     return (
       <div id="partners" className="partners">
         <div className="form-components filter-components">
           <h4>Filters</h4>
           <form id="filtersForm" action="GET" onSubmit={(e)=>{e.preventDefault();}}>
-            <PartnerTypeSelect onFilterChange={this.onFilterTypeChange.bind(this)} typeOptions={this.props._partnerTypes}/>
+            <PartnerTypeSelect onFilterChange={this.onFilterTypeChange.bind(this)} typeOptions={this.state._partnerTypes}/>
             <PartnerNameSearchInput onFilterChange={this.onFilterNameChange.bind(this)}/>
           </form>
         </div>
@@ -55,6 +64,5 @@ class Partners extends Component {
   onFilterTypeChange(newVal){ this.setState({ _partnerTypeFilter : newVal }); }
   onFilterNameChange(newVal){ this.setState({ _partnerNameFilter : newVal }); }
 }
-Partners.defaultProps = { _partnerTypes : [] };
 
 export default Partners;
