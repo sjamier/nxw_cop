@@ -1,6 +1,7 @@
 {
   "partners": [
     {
+      "id" : 1,
       "name": "Nexway",
       "logo": "../img/brand_logo.svg",
       "sitetype": "STORE",
@@ -44,6 +45,7 @@
       ]
     },
     {
+      "id" : 2,
       "name": "Softwareload",
       "logo": "http://partnersdemo.nexway.com/partners/softwareload/170524/img/brand_logo.png",
       "sitetype": "STORE",
@@ -56,6 +58,7 @@
         }      ]
     },
     {
+      "id" : 3,
       "name": "Gamesload [nexway games]",
       "logo": "http://partnersdemo.nexway.com/partners/gamesload/170530/img/brand_logo.png",
       "sitetype": "STORE",
@@ -81,6 +84,7 @@
       ]
     },
     {
+      "id" : 31,
       "name": "LMTech [Global Techies]",
       "logo": "http://partnersdemo.nexway.com/partners/LMTech/170727/img/brand_logo.png",
       "sitetype": "CART",
@@ -94,6 +98,7 @@
       ]
     },
     {
+      "id" : 30,
       "name": "Razer",
       "logo": "http://partnersdemo.nexway.com/partners/razer/170808/img/brand_logo.png",
       "sitetype": "STORE",
@@ -119,6 +124,7 @@
       ]
     },
     {
+      "id" : 29,
       "name": "Compufly [easysupport]",
       "logo": "http://partnersdemo.nexway.com/partners/easysupport/170712/img/brand_logo.png",
       "sitetype": "CART",
@@ -132,6 +138,7 @@
       ]
     },
     {
+      "id" : 28,
       "name": "Tubmanburg [Desktop Helpers]",
       "logo": "http://partnersdemo.nexway.com/partners/tubmanburg/170621/img/brand_logo.png",
       "sitetype": "CART",
@@ -151,6 +158,7 @@
       ]
     },
     {
+      "id" : 27,
       "name": "AMS [AM PC SECURITY]",
       "logo": "http://partnersdemo.nexway.com/partners/AMSecurity/170615/img/brand_logo.png",
       "sitetype": "CART",
@@ -164,6 +172,7 @@
       ]
     },
     {
+      "id" : 26,
       "name": "proXPN",
       "logo": "http://partnersdemo.nexway.com/partners/proxpn/170612/img/brand_logo.png",
       "sitetype": "CART",
@@ -177,6 +186,7 @@
       ]
     },
     {
+      "id" : 25,
       "name": "Acronis",
       "logo": "http://partnersdemo.nexway.com/partners/acronis/170510/img/brand_logo.png",
       "sitetype": "CART",
@@ -196,6 +206,7 @@
       ]
     },
     {
+      "id" : 24,
       "name": "GNR Management",
       "logo": "http://partnersdemo.nexway.com/partners/gnr/170428/img/brand_logo.png",
       "sitetype": "CART",
@@ -209,6 +220,7 @@
       ]
     },
     {
+      "id" : 23,
       "name": "Systweak [Jawego]",
       "logo": "http://partnersdemo.nexway.com/partners/systweak/170411/img/brand_logo.png",
       "sitetype": "CART",
@@ -222,6 +234,7 @@
       ]
     },
     {
+      "id" : 22,
       "name": "01Net",
       "logo": "http://partnersdemo.nexway.com/partners/01net/170327/img/brand_logo.png",
       "sitetype": "CART",
@@ -235,6 +248,7 @@
       ]
     },
     {
+      "id" : 21,
       "name": "ProtechSquad [vtechaid]",
       "logo": "http://partnersdemo.nexway.com/partners/protechsquad/170223/img/brand_logo.png",
       "sitetype": "CART",
@@ -248,6 +262,7 @@
       ]
     },
     {
+      "id" : 20,
       "name": "PCVark [Advanced PC Fixer]",
       "logo": "http://partnersdemo.nexway.com/partners/pcvark/170216/img/brand_logo.png",
       "sitetype": "CART",
@@ -267,6 +282,7 @@
       ]
     },
     {
+      "id" : 19,
       "name": "383media - Driver Restore",
       "logo": "http://partnersdemo.nexway.com/partners/383media/170110/img/brand_logo.png",
       "sitetype": "CART",
@@ -280,6 +296,7 @@
       ]
     },
     {
+      "id" : 18,
       "name": "Auslogics",
       "logo": "http://partnersdemo.nexway.com/partners/auslogics/161207/img/brand_logo.png",
       "sitetype": "CART",
@@ -293,6 +310,7 @@
       ]
     },
     {
+      "id" : 17,
       "name": "Teamviewer",
       "logo": "http://partnersdemo.nexway.com/partners/teamviewer/151007/img/dl_logo_dark.png",
       "sitetype": "CART",
@@ -306,6 +324,7 @@
       ]
     },
     {
+      "id" : 16,
       "name": "Teamviewer [Blizz]",
       "logo": "http://partnersdemo.nexway.com/partners/teamviewer/blizz/26072016/img/brand_logo.png",
       "sitetype": "CART",
@@ -319,6 +338,7 @@
       ]
     },
     {
+      "id" : 15,
       "name": "BitTorrent",
       "logo": "http://partnersdemo.nexway.com/partners/bittorrent/store/img/logo.png",
       "sitetype": "STORE",
@@ -332,6 +352,7 @@
       ]
     },
     {
+      "id" : 14,
       "name": "µTorrent",
       "logo": "http://partnersdemo.nexway.com/partners/bittorrent/store-uTorrent/img/logo.png",
       "sitetype": "STORE",
@@ -345,6 +366,7 @@
       ]
     },
     {
+      "id" : 13,
       "name": "Konami",
       "logo": "http://partnersdemo.nexway.com/partners/Konami/01072016/img/brand_logo_light.png",
       "sitetype": "CART",
@@ -358,6 +380,7 @@
       ]
     },
     {
+      "id" : 12,
       "name": "TechLive-Connect",
       "logo": "http://partnersdemo.nexway.com/partners/TechLive-Connect/22062016/img/brand_logo.png",
       "sitetype": "CART",
@@ -371,6 +394,7 @@
       ]
     },
     {
+      "id" : 11,
       "name": "CCM",
       "logo": "http://partnersdemo.nexway.com/partners/CCM/170706/img/brand_logo.png",
       "sitetype": "CART",
@@ -390,6 +414,7 @@
       ]
     },
     {
+      "id" : 10,
       "name": "Stellar-Data",
       "logo": "http://partnersdemo.nexway.com/partners/Stellar-Data/160329/img/brand_logo.png",
       "sitetype": "CART",
@@ -403,6 +428,7 @@
       ]
     },
     {
+      "id" : 9,
       "name": "Enigma-Recovery",
       "logo": "http://partnersdemo.nexway.com/partners/enigma-recovery/150701/img/brand_logo.png",
       "sitetype": "CART",
@@ -416,6 +442,7 @@
       ]
     },
     {
+      "id" : 8,
       "name": "Kingsoft",
       "logo": "http://partnersdemo.nexway.com/partners/kingsoft/150617/img/brand_logo.png",
       "sitetype": "CART",
@@ -429,6 +456,7 @@
       ]
     },
     {
+      "id" : 7,
       "name": "CNet",
       "logo": "http://partnersdemo.nexway.com/partners/cnet/150511/img/dl_logo_white.png",
       "sitetype": "CART",
@@ -442,6 +470,7 @@
       ]
     },
     {
+      "id" : 6,
       "name": "Focus",
       "logo": "http://partnersdemo.nexway.com/partners/focus/store/150414/img/focus_logo.png",
       "sitetype": "STORE",
@@ -468,6 +497,7 @@
       ]
     },
     {
+      "id" : 5,
       "name": "Nadeo",
       "logo": "http://partnersdemo.nexway.com/partners/nadeo/store/150626/img/mp_logo.png",
       "sitetype": "STORE",
@@ -487,6 +517,7 @@
       ]
     },
     {
+      "id" : 4,
       "name": "Sega",
       "logo": "http://partnersdemo.nexway.com/partners/sega/store/150227/img/sega_logo.png",
       "sitetype": "STORE",
