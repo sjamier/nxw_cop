@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 import { FBDB_Config } from './config/fbconfig'
 import * as firebase from "firebase";
@@ -7,12 +7,31 @@ import Partners from './components/Partners';
 import Partner from './components/Partner';
 
 
+class PartnerAdd extends Component {
+  render(){
+    return(
+      <div id="partner-breeder">
+        <h3>New Onboarding Partner</h3>
+        <form action="POST">
+          <input type="text" placeholder="ID"/>
+          <input type="text" placeholder="Name"/>
+          <input type="text" placeholder="Logo"/>
+          <input type="text" placeholder="CART, STORE, ..."/>
+          <input type="text" placeholder="Mockup Url"/>
+          <input type="text" placeholder="Date Started"/>
+          <input type="text" placeholder="Mockup status: 'ok', 'ko', 'wip', 'ok old'"/>
+          <input type="textarea" placeholder="Comment"/>
+        </form>
+      </div>
+    );
+  }
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props);
-
-    // Initialize Firebase
-    this.nxw_copFBDB = firebase.initializeApp(FBDB_Config);
+    this.nxw_copFBDB = firebase.initializeApp(FBDB_Config); // Initialize Firebase
     this.partnersFBDB = this.nxw_copFBDB.database().ref().child('partners');
     this.state = {
       partnersData : [],
@@ -53,11 +72,8 @@ class App extends Component {
 
   render() {
     console.log("Rendering !!    - this.state.partnersData : "+this.state.partnersData);
-    const PartnersList = () => {
-      return (
-        <Partners partners={this.state.partnersData} />
-      );
-    }
+    const PartnersList = () => { return ( <Partners partners={this.state.partnersData} /> ); };
+    const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} /> ); };
     return (
       <Router>
         <div className="container main" data-reactroot="root">
@@ -66,7 +82,8 @@ class App extends Component {
             <h1><span className="f-letter">C</span>astor <span className="f-letter">O</span>nboarding <span className="f-letter">P</span>artners</h1>
           </div>
           <Switch>
-            <Route exact path="/" render={ PartnersList }/>
+            <Route exact path="/" render={ PartnersList } />
+            <Route exact path="/add" render={ AddPartner } />
             { this.state.PartnersHTMLRoutes }
           </Switch>
         </div>

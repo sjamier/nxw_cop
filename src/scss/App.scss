@@ -67,6 +67,9 @@ input[type="text"]{ padding-left: 5px;}
 }
 .version-comment { font-size: 10px; color: #679; background-color: rgba(0,0,0,.04); border-left: 1px solid #fff; flex-grow: 1; flex-shrink: 1;}
 
+#partner-breeder { width: 80%; margin: 0 auto; display: flex; flex-direction: column; justify-content: space-between;
+  & form { flex-direction: column;}
+}
 
 @media (min-width: 600px) {
   .form-components { padding: 10px 20px 15px; display: flex;
