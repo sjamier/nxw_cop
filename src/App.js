@@ -13,14 +13,15 @@ class PartnerAdd extends Component {
       <div id="partner-breeder">
         <h3>New Onboarding Partner</h3>
         <form action="POST">
-          <input type="text" placeholder="ID"/>
-          <input type="text" placeholder="Name"/>
-          <input type="text" placeholder="Logo"/>
-          <input type="text" placeholder="CART, STORE, ..."/>
-          <input type="text" placeholder="Mockup Url"/>
-          <input type="text" placeholder="Date Started"/>
-          <input type="text" placeholder="Mockup status: 'ok', 'ko', 'wip', 'ok old'"/>
-          <input type="textarea" placeholder="Comment"/>
+          <input type="text" placeholder="ID" />
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Logo" />
+          <input type="text" placeholder="CART, STORE, ..." />
+          <input type="text" placeholder="Mockup Url" />
+          <input type="text" placeholder="Date Started" />
+          <input type="text" placeholder="Mockup status: 'ok', 'ko', 'wip', 'ok old'" />
+          <input type="textarea" placeholder="Comment" />
+          <input type="submit" value="OK" />
         </form>
       </div>
     );

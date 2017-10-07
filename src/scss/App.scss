@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Saira:400,500,600');
 
 // Resets \\
 body, html, ul, li { padding: 0; margin: 0;}
 ul, li { list-style: none;}
 
-body { font-family: 'Open Sans', Arial, sans-serif; max-width: none; background-color: #f7f7f7;}
+body { font-family: 'Saira', Arial, sans-serif; max-width: none; background-color: #f7f7f7;}
 
 form { margin-top: 5px; display: flex; justify-content: space-between;
   input[type="text"]{ height: 40px; border: 1px solid #aaa; flex: 1;}
@@ -23,7 +23,7 @@ input[type="text"]{ padding-left: 5px;}
 .header {
   .main>& { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #8af url(../img/josh-sorenson-386148.jpg) no-repeat center; background-size: 100% auto;}
   img { max-width: 150%; position: absolute; top: -80px; left: -20px;}
-  h1 { font-size: 30px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left;}
+  h1 { font-size: 40px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left;}
 }
 
 
