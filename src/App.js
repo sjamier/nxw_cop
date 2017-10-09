@@ -5,28 +5,7 @@ import * as firebase from "firebase";
 
 import Partners from './components/Partners';
 import Partner from './components/Partner';
-
-
-class PartnerAdd extends Component {
-  render(){
-    return(
-      <div id="partner-breeder">
-        <h3>New Onboarding Partner</h3>
-        <form action="POST">
-          <input type="text" placeholder="ID" />
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Logo" />
-          <input type="text" placeholder="CART, STORE, ..." />
-          <input type="text" placeholder="Mockup Url" />
-          <input type="text" placeholder="Date Started" />
-          <input type="text" placeholder="Mockup status: 'ok', 'ko', 'wip', 'ok old'" />
-          <input type="textarea" placeholder="Comment" />
-          <input type="submit" value="OK" />
-        </form>
-      </div>
-    );
-  }
-}
+import PartnerAdd from './components/PartnerAdd';
 
 
 class App extends Component {
@@ -71,10 +50,15 @@ class App extends Component {
     console.log("DidMount !!    - this.state.partnersData : "+this.state.partnersData);
   }
 
+  onPartnerAdded(newPartner) {
+    console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.type :'+newPartner.type+' - newPartner.versions.vurl :'+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
+    this.partnersFBDB.push(newPartner);
+  }
+
   render() {
-    console.log("Rendering !!    - this.state.partnersData : "+this.state.partnersData);
+    console.log("Rendering !!");
     const PartnersList = () => { return ( <Partners partners={this.state.partnersData} /> ); };
-    const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} /> ); };
+    const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} onPartnerAdded={ this.onPartnerAdded.bind(this) }/> ); };
     return (
       <Router>
         <div className="container main" data-reactroot="root">
