@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
-import { FBDB_Config } from './config/fbconfig'
+import { FBDB_Config } from './config/fbconfig';
 import * as firebase from "firebase";
 
 import Partners from './components/Partners';
 import Partner from './components/Partner';
-import PartnerAdd from './components/PartnerAdd';
-
 
 class App extends Component {
   constructor(props) {
@@ -23,25 +21,27 @@ class App extends Component {
     console.log("WillMount !!    - this.state.partnersData : "+this.state.partnersData);
     let currentPartners = this.state.partnersData;
     this.partnersFBDB.on('child_added', snap => {
-      currentPartners.push({
-        id: snap.val().id,
-        logo: snap.val().logo,
-        name: snap.val().name,
-        sitetype: snap.val().sitetype,
-        versions: snap.val().versions,
-      });
+      currentPartners.push({ copkey : snap.key,
+                             id : snap.val().id,
+                             name : snap.val().name,
+                             logo : snap.val().logo,
+                             sitetype : snap.val().sitetype,
+                             versions : snap.val().versions,
+                           })
+    });
+    setTimeout(() => {
       this.setState({
-        partnersData : currentPartners,
-        PartnersHTMLRoutes : currentPartners
-          .map( partner => {
-            const PartnerSection = () => {
-              console.log("building route for : "+partner.name);
-              return ( <Partner key={partner.id} partner={partner} /> );
-            }
-            return ( <Route key={partner.id} path={`/${partner.name}/`} partner={partner} component={ PartnerSection } /> );
-          })
-      })
-    })
+          partnersData : currentPartners,
+          PartnersHTMLRoutes : currentPartners
+            .map( partner => {
+              const PartnerSection = () => {
+                console.log("building route for : "+partner.name);
+                return ( <Partner key={partner.copkey} partner={partner} /> );
+              }
+              return ( <Route key={partner.copkey} path={`/${partner.name}/`} partner={partner} component={ PartnerSection } /> );
+            })
+        })
+    }, 1100);
     console.log('partnersData :'+currentPartners);
     console.log('partnersFBDB :'+this.partnersFBDB);
   }
@@ -49,26 +49,20 @@ class App extends Component {
   componentDidMount() {
     console.log("DidMount !!    - this.state.partnersData : "+this.state.partnersData);
   }
-
-  onPartnerAdded(newPartner) {
-    console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.type :'+newPartner.type+' - newPartner.versions.vurl :'+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
-    this.partnersFBDB.push(newPartner);
-  }
-
   render() {
     console.log("Rendering !!");
     const PartnersList = () => { return ( <Partners partners={this.state.partnersData} /> ); };
-    const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} onPartnerAdded={ this.onPartnerAdded.bind(this) }/> ); };
+    // const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} onPartnerAdded={ this.onPartnerAdded.bind(this) }/> ); };
     return (
       <Router>
         <div className="container main" data-reactroot="root">
           <div className="header jumbotron">
-            {/*<img src={ BgImg } alt="Nexway Onboarding" />*/}
+            {/* <img src={ BgImg } alt="Nexway Onboarding" /> */}
             <h1><span className="f-letter">C</span>astor <span className="f-letter">O</span>nboarding <span className="f-letter">P</span>artners</h1>
           </div>
           <Switch>
             <Route exact path="/" render={ PartnersList } />
-            <Route exact path="/add" render={ AddPartner } />
+            {/* <Route exact path="/add" render={ AddPartner } /> */}
             { this.state.PartnersHTMLRoutes }
           </Switch>
         </div>
