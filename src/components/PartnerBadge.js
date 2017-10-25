@@ -5,15 +5,40 @@ class PartnerBadge extends Component {
   constructor(props) {
     super(props);
     this.state = ({
+      partner : {
+        id : '',
+        name : '',
+        logo : '',
+        sitetype : '',
+      },
       editBtn : false,
       deleteBtn : false,
+      showPartnerEditForm : false,
     });
+    this.onSubmit = this.onEditPartner.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
   onEditPartner(e) {
     e.preventDefault();
+    this.setState({ showPartnerEditForm : this.state.showPartnerEditForm ? false : true });
   }
   onDeletePartner(e) {
     e.preventDefault();
+  }
+  updateState(e){
+    const stateObj = this.state.partner;
+    stateObj[e.target.name] = e.target.value;
+    this.setState({ partner : stateObj });
+  }
+
+  componentWillMount() {
+    let statePartnerInit = {
+      id : this.props.partner.id,
+      name : this.props.partner.name,
+      logo : this.props.partner.logo,
+      sitetype : this.props.partner.sitetype,
+    };
+    this.setState({ partner : statePartnerInit });
   }
   render() {
     let WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';
@@ -23,14 +48,24 @@ class PartnerBadge extends Component {
         { this.state.deleteBtn ? <a className='btn btn-sign lowered-sign' onClick={ this.onDeletePartner.bind(this) }>\<u>*</u>/</a> : null }
       </div> : null;
     return (
-      <WrapTag className="partner-badge">
-        <div className="partner-header" onClick={this.onClick.bind(this)}>
-          <div className="partner-logo"><img src={this.props.partner.logo} alt={this.props.partner.name} /></div>
-          <h2 className="partner-id">{this.props.partner.name}</h2>
-          <div className="partner-type">{this.props.partner.sitetype}</div>
-        </div>
-        { EditBtns }
-      </WrapTag>
+      this.state.showPartnerEditForm ?
+        <li id="partner-editor" className="partner-badge">
+          <form onSubmit={ this.onSubmit } >
+            <input name="sitetype" type="text" placeholder="CART, STORE, ..." value={ this.state.partner.sitetype } onChange={ this.updateState } />
+            <input name="name" type="text" placeholder="Name" value={ this.state.partner.name } onChange={ this.updateState } />
+            <input name="logo" type="text" placeholder="Logo" value={ this.state.partner.logo } onChange={ this.updateState } />
+            <input type="submit" value="OK"/>
+          </form>
+        </li>
+      :
+        <WrapTag className="partner-badge">
+          <div className="partner-header" onClick={this.onClick.bind(this)}>
+            <div className="partner-logo"><img src={this.state.partner.logo} alt={this.state.partner.name} /></div>
+            <h2 className="partner-id">{this.state.partner.name}</h2>
+            <div className="partner-type">{this.state.partner.sitetype}</div>
+          </div>
+          { EditBtns }
+        </WrapTag>
     );
   }
   componentWillReceiveProps() {

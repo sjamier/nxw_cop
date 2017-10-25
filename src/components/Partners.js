@@ -96,7 +96,7 @@ class Partners extends Component {
         <div id="partners" className="partners">
           <div className="form-components filter-components">
             <h4>Filters</h4>
-            <form id="filtersForm" action="POST" onSubmit={(e)=>{e.preventDefault();}}>
+            <form id="filtersForm" onSubmit={(e)=>{e.preventDefault();}}>
               <PartnerTypeSelect onFilterChange={this.onFilterTypeChange.bind(this)} typeOptions={this.state.partnerTypes}/>
               <PartnerNameSearchInput onFilterChange={this.onFilterNameChange.bind(this)}/>
             </form>

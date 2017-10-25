@@ -25,7 +25,7 @@ form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-betw
     }
   }
   .form-group { margin: 0;}
-  #partner-breeder & { margin-top: 0; flex-direction: column;}
+  #partner-breeder &, #partner-editor & { margin-top: 0; flex-direction: column;}
 }
 input[type="text"]{ padding-left: 5px;}
 
@@ -54,7 +54,9 @@ input[type="text"]{ padding-left: 5px;}
 .section {
   >.header { margin: 20px 0 15px; display: flex; align-items: center;}
   .btn-group { position: relative;
-    >.btn { float: none;}
+    >.btn { float: none;
+      &:active { background-color: #f7f7f7;}
+    }
     .btn+.btn { margin-left: 3px;}
   }
 }
@@ -68,7 +70,7 @@ input[type="text"]{ padding-left: 5px;}
 .partners  > ul { display: flex; flex-wrap: wrap; justify-content: space-evenly;
    > li:hover { cursor: pointer;}
 }
-.partner-badge { margin: 0 auto 10px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative;
+.partner-badge { margin: 0 auto 15px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative;
   & .btn-group { position: absolute; top: -5px; right: 5px;}
 }
 .partner-header { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1;}
@@ -116,7 +118,7 @@ input[type="text"]{ padding-left: 5px;}
     form { flex: 4;}
   }
   .header img { max-width: 130%; top: -140px; left: 0;}
-  .partner-badge { margin: 0 0 10px; flex: 0 1 47%;}
+  .partner-badge { flex: 0 1 47%;}
 }
 @media (min-width: 768px) {
   .section:not(.section-row) { width: 48%;}
