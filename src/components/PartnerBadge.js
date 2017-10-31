@@ -5,21 +5,19 @@ class PartnerBadge extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      partner : {
-        id : '',
-        name : '',
-        logo : '',
-        sitetype : '',
-      },
+      partner : {},
       editBtn : false,
       deleteBtn : false,
       showPartnerEditForm : false,
     });
-    this.onSubmit = this.onEditPartner.bind(this);
+    this.onSubmit = this.onEditedPartner.bind(this);
     this.updateState = this.updateState.bind(this);
   }
+
+  onClick(e){
+    if (this.props.clickable) this.props.history.push(`/${this.props.partner.name}`);
+  }
   onEditPartner(e) {
-    e.preventDefault();
     this.setState({ showPartnerEditForm : this.state.showPartnerEditForm ? false : true });
   }
   onDeletePartner(e) {
@@ -30,14 +28,15 @@ class PartnerBadge extends Component {
     stateObj[e.target.name] = e.target.value;
     this.setState({ partner : stateObj });
   }
+  onEditedPartner(e) {
+    e.preventDefault();
+    this.setState({ showPartnerEditForm : this.state.showPartnerEditForm ? false : true });
+    this.props.onEdited(this.state.partner);
+  }
 
   componentWillMount() {
-    let statePartnerInit = {
-      id : this.props.partner.id,
-      name : this.props.partner.name,
-      logo : this.props.partner.logo,
-      sitetype : this.props.partner.sitetype,
-    };
+    let statePartnerInit = this.props.partner;
+    statePartnerInit.fbdbkey = this.props.partner.fbdbkey;
     this.setState({ partner : statePartnerInit });
   }
   render() {
@@ -73,10 +72,6 @@ class PartnerBadge extends Component {
       this.setState({ editBtn : this.props.editMode });
       this.setState({ deleteBtn : this.props.deleteMode });
     }, 0);
-  }
-
-  onClick(e){
-    if (this.props.clickable) this.props.history.push(`/${this.props.partner.name}`);
   }
 };
 

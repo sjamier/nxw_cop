@@ -16,7 +16,7 @@ class Partner extends Component {
     console.log(JSON.stringify(dataSync));
 
     const partnersFBDB = firebase.database().ref().child('partners');
-    return partnersFBDB.child(dataSync.copkey).child('versions').set(newValue);
+    return partnersFBDB.child(dataSync.fbdbkey).child('versions').set(newValue);
     // const partnerRef = partnerKey.child('versions').set(newValue);
   }
   render(){

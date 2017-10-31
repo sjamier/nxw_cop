@@ -36,43 +36,45 @@ class Partners extends Component {
   constructor() {
     super();
     this.state = ({
-        partnerTypes : [],
-        partnerTypeFilter : "ALL",
-        partnerNameFilter : "",
-        showNewPartnerForm : false,
-        editMode : false,
-        deleteMode : false,
+      partnerTypes : [],
+      partnerTypeFilter : "ALL",
+      partnerNameFilter : "",
+      showNewPartnerForm : false,
+      editMode : false,
+      deleteMode : false,
     });
     this.partnersFBDB = firebase.database().ref().child('partners');
+    this.onEditedPartner = this.onEditedPartner.bind(this);
   }
+
+  onEditMode() { this.setState({ editMode : !this.state.editMode }); }
+  onDeleteMode() { this.setState({ deleteMode : !this.state.deleteMode }); }
 
   onFilterTypeChange(newVal) { this.setState({ partnerTypeFilter : newVal }); }
   onFilterNameChange(newVal) { this.setState({ partnerNameFilter : newVal }); }
 
   newPartnerForm(e) {
     if (!this.state.showNewPartnerForm) {
-      console.log("New Partner Form should display");
+      // console.log("New Partner Form should display");
       this.setState({ showNewPartnerForm : true });
     } else {
       this.setState({ showNewPartnerForm : false })
     }
   }
-  onAddPartner(newPartner) {
+
+  onAddedPartner(newPartner) {
     console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.sitetype :'+newPartner.sitetype+' - newPartner.versions.vurl : '+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
     this.partnersFBDB.push(newPartner);
     this.setState({ showNewPartnerForm : false })
   }
-  onEditMode() {
-    let currEditMode = this.state.editMode;
-    console.log('currEditMode : '+currEditMode);
-    this.setState({ editMode : !currEditMode });
-  }
-  onDeleteMode() {
-    this.setState({ deleteMode : this.state.deleteMode ? false : true });
-  }
 
-  // componentWillMount() { console.log("this.props.partners : "+this.props.partners); }
-  // componentDidMount() {}
+  onEditedPartner(editedPartner) {
+    console.log('about to write updated partner : '+editedPartner.name+' to firebdb');
+    this.props.onReloadTrigger(editedPartner);
+  }
+  componentWillMount() {
+    console.log("this.props.partners : "+this.props.partners);
+  }
   render(){
     this.props.partners.forEach( partner => {
       if (this.state.partnerTypes.indexOf(partner.sitetype) === -1) this.state.partnerTypes.push(partner.sitetype);
@@ -80,7 +82,7 @@ class Partners extends Component {
     const PartnersBadges = this.props.partners
       .filter( partner => { return this.state.partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state.partnerTypeFilter; })
       .filter( partner => { return this.state.partnerNameFilter === "" ? partner : partner.name.toLowerCase().includes(this.state.partnerNameFilter.toLowerCase()); })
-      .map( partner => { return ( <PartnerBadge key={partner.id} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} /> ); });
+      .map( partner => { return ( <PartnerBadge key={partner.id} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } /> ); });
     console.log("NbResults: "+PartnersBadges.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
 
     return (
@@ -102,12 +104,13 @@ class Partners extends Component {
             </form>
           </div>
           <ul>
-            { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddPartner.bind(this) } /> : null }
+            { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> : null }
             { PartnersBadges }
           </ul>
         </div>
       </div>
     );
+    // componentDidMount() {}
   }
 }
 

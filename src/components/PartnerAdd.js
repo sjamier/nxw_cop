@@ -33,8 +33,8 @@ class PartnerAdd extends Component {
       console.log("new PartnerId : "+ newPartnerId);
       const syncPartnerState = this.state.partner;
       syncPartnerState.id = newPartnerId;
-      this.setState({ partner : syncPartnerState })
-    });
+      this.setState({ partner : syncPartnerState });
+    })
     let newPartner = {
       id : this.state.partner.id,
       name : this.state.partner.name,
