@@ -18,11 +18,21 @@ class App extends Component {
     this.partnersFBDB = this.nxw_copFBDB.database().ref().child('partners');
   }
 
-  onReloadTrigger(editedPartner) {
-    const partnerDBKey = editedPartner.fbdbkey;
-    delete editedPartner["fbdbkey"];
-    console.log('editedPartner : '+JSON.stringify(editedPartner));
-    this.partnersFBDB.child(partnerDBKey).set(editedPartner);
+  onDBSyncTrigger(partner,action) {
+    const partnerDBKey = partner.fbdbkey;
+    switch (action) {
+      case 'edit':
+        delete partner["fbdbkey"];
+        this.partnersFBDB.child(partnerDBKey).set(partner);
+        partner.fbdbkey = partnerDBKey
+        break;
+      case 'delete':
+        this.partnersFBDB.child(partnerDBKey).remove();
+        break;
+      default:
+        console.log("mmh.. you shouldn't be here...")
+        break;
+    }
     this.initState();
   }
 
@@ -40,28 +50,22 @@ class App extends Component {
         return new Promise((resolve, reject) => {
           let currentPartners = [];
           this.partnersFBDB.on('child_added', snap => {
-            currentPartners.push({
-              fbdbkey : snap.key,
-              id : snap.val().id,
-              name : snap.val().name,
-              logo : snap.val().logo,
-              sitetype : snap.val().sitetype,
-              versions : snap.val().versions,
-            });
+            let newPartner = snap.val();
+            newPartner.fbdbkey = snap.key;
+            currentPartners.push(newPartner);
             if (snap.key === this.state.lastPartnerKey) resolve(currentPartners);
           });
         })
       })
-      .then((partnersDB) => {
+      .then((partners) => {
         this.setState({
-          partnersData : partnersDB,
-          PartnersHTMLRoutes : partnersDB
+          partnersData : partners,
+          PartnersHTMLRoutes : partners
           .map( partner => {
-            const PartnerSection = () => {
-              // console.log("building route for : "+partner.name);
+            const PartnerSection = () => { // console.log("building route for : "+partner.name);
               return ( <Partner key={partner.fbdbkey} partner={partner}/> );
             }
-            return ( <Route key={partner.fbdbkey} path={`/${partner.name}/`} partner={partner} component={ PartnerSection } /> );
+            return ( <Route key={partner.fbdbkey} path={`/${partner.name.split(' ').join('')}/`} partner={partner} component={ PartnerSection } /> );
           })
         })
         console.log('partnersFBDB :'+this.partnersFBDB);
@@ -73,13 +77,9 @@ class App extends Component {
   componentWillMount() {
     this.initState();
   }
-  componentDidMount() {
-    console.log("DidMount !!    - this.state.partnersData : "+this.state.partnersData);
-  }
-
   render() {
     console.log("Rendering !!");
-    const PartnersList = () => { return ( <Partners partners={this.state.partnersData}  onReloadTrigger={ this.onReloadTrigger.bind(this) } /> ); };
+    const PartnersList = () => { return ( <Partners partners={this.state.partnersData}  onDBSyncTrigger={ this.onDBSyncTrigger.bind(this) } /> ); };
     // const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} onPartnerAdded={ this.onPartnerAdded.bind(this) }/> ); };
     return (
       <Router>
@@ -95,6 +95,9 @@ class App extends Component {
         </div>
       </Router>
     )
+  }
+  componentDidMount() {
+    console.log("DidMount !!    - this.state.partnersData : "+this.state.partnersData);
   }
 }
 

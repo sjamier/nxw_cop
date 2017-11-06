@@ -36,6 +36,7 @@ class Partners extends Component {
   constructor() {
     super();
     this.state = ({
+      partners : {},
       partnerTypes : [],
       partnerTypeFilter : "ALL",
       partnerNameFilter : "",
@@ -45,6 +46,7 @@ class Partners extends Component {
     });
     this.partnersFBDB = firebase.database().ref().child('partners');
     this.onEditedPartner = this.onEditedPartner.bind(this);
+    this.onDeletedPartner = this.onDeletedPartner.bind(this);
   }
 
   onEditMode() { this.setState({ editMode : !this.state.editMode }); }
@@ -69,20 +71,27 @@ class Partners extends Component {
   }
 
   onEditedPartner(editedPartner) {
-    console.log('about to write updated partner : '+editedPartner.name+' to firebdb');
-    this.props.onReloadTrigger(editedPartner);
+    console.log('about to write updated partner to firebdb : '+JSON.stringify(editedPartner));
+    this.props.onDBSyncTrigger(editedPartner, 'edit')
   }
+
+  onDeletedPartner(deletedPartner) {
+    console.log('about to delete partner from firebdb : '+JSON.stringify(deletedPartner));
+    this.props.onDBSyncTrigger(deletedPartner, 'delete')
+  }
+
   componentWillMount() {
     console.log("this.props.partners : "+this.props.partners);
+    this.setState({ partners : this.props.partners })
   }
   render(){
-    this.props.partners.forEach( partner => {
+    this.state.partners.forEach( partner => {
       if (this.state.partnerTypes.indexOf(partner.sitetype) === -1) this.state.partnerTypes.push(partner.sitetype);
     });
-    const PartnersBadges = this.props.partners
+    const PartnersBadges = this.state.partners
       .filter( partner => { return this.state.partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state.partnerTypeFilter; })
       .filter( partner => { return this.state.partnerNameFilter === "" ? partner : partner.name.toLowerCase().includes(this.state.partnerNameFilter.toLowerCase()); })
-      .map( partner => { return ( <PartnerBadge key={partner.id} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } /> ); });
+      .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
     console.log("NbResults: "+PartnersBadges.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
 
     return (
@@ -110,7 +119,11 @@ class Partners extends Component {
         </div>
       </div>
     );
-    // componentDidMount() {}
+  }
+  // componentDidMount() {}
+  componentWillReceiveProps(nextProps) {
+    console.log("nextProps.partners : "+nextProps.partners);
+    this.setState({ partners : nextProps.partners });
   }
 }
 

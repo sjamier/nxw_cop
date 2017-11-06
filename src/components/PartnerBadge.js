@@ -9,29 +9,39 @@ class PartnerBadge extends Component {
       editBtn : false,
       deleteBtn : false,
       showPartnerEditForm : false,
+      partnerEdited : false,
     });
     this.onSubmit = this.onEditedPartner.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
   onClick(e){
-    if (this.props.clickable) this.props.history.push(`/${this.props.partner.name}`);
+    if (this.props.clickable) this.props.history.push(`/${this.props.partner.name.split(' ').join('')}`);
   }
   onEditPartner(e) {
-    this.setState({ showPartnerEditForm : this.state.showPartnerEditForm ? false : true });
+    this.setState({ showPartnerEditForm : !this.state.showPartnerEditForm });
   }
   onDeletePartner(e) {
     e.preventDefault();
+    this.props.onDeleted(this.state.partner);
   }
   updateState(e){
     const stateObj = this.state.partner;
-    stateObj[e.target.name] = e.target.value;
-    this.setState({ partner : stateObj });
+    if (stateObj[e.target.name] !== e.target.value) {
+      this.setState({ partnerEdited : true });
+      stateObj[e.target.name] = e.target.value;
+      this.setState({ partner : stateObj });
+    }
   }
   onEditedPartner(e) {
     e.preventDefault();
-    this.setState({ showPartnerEditForm : this.state.showPartnerEditForm ? false : true });
-    this.props.onEdited(this.state.partner);
+    if (this.state.partnerEdited) {
+      console.log('partnerEdited : '+this.state.partnerEdited);
+      this.setState({ showPartnerEditForm : !this.state.showPartnerEditForm });
+      this.props.onEdited(this.state.partner);
+    } else {
+      this.setState({ showPartnerEditForm : !this.state.showPartnerEditForm });
+    }
   }
 
   componentWillMount() {
@@ -67,11 +77,9 @@ class PartnerBadge extends Component {
         </WrapTag>
     );
   }
-  componentWillReceiveProps() {
-    setTimeout(() => {
-      this.setState({ editBtn : this.props.editMode });
-      this.setState({ deleteBtn : this.props.deleteMode });
-    }, 0);
+  componentWillReceiveProps(nextProps) {
+    this.setState({ editBtn : nextProps.editMode });
+    this.setState({ deleteBtn : nextProps.deleteMode });
   }
 };
 

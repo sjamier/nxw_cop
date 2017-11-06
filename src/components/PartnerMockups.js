@@ -25,18 +25,24 @@ class PartnerMockups extends Component {
     this.onDeleteMode = this.deleteMode.bind(this);
     this.onDeleteVersion = this.deleteVersion.bind(this);
   }
+
   newVersionForm(e) {
-    if (!this.state.showNewVersionForm) {
-      console.log("New Mockup Version Form should display");
-      this.setState({ showNewVersionForm : true });
-    } else {
-      this.setState({ showNewVersionForm : false })
-    }
+    if (!this.state.showNewVersionForm) { this.setState({ showNewVersionForm : true }); }
+    else { this.setState({ showNewVersionForm : false }) }
   }
+  editMode() {
+    if (!this.state.editMode) { this.setState({ editMode : true }); }
+    else { this.setState({ editMode : false }) }
+  }
+  deleteMode() {
+    if (!this.state.deleteMode) { this.setState({ deleteMode : true }); }
+    else { this.setState({ deleteMode : false }) }
+  }
+
   newVersion(e) {
     e.preventDefault();
     if (this.state.newVersion.vdate !== '' && this.state.newVersion.vurl !== '') {
-      console.log("New Mockup Version Added");
+      // console.log("New Mockup Version Added");
       const stateVersions = this.state.versions;
       stateVersions.push(this.state.newVersion);
       this.setState({ versions : stateVersions })
@@ -57,22 +63,6 @@ class PartnerMockups extends Component {
     this.state.versions.forEach( version => { dataSync.push( version === oldVersion ? editedVersion : version ) });
     this.setState({ versions : dataSync });
     this.props.onMockupsChange(dataSync);
-  }
-  editMode() {
-    if (!this.state.editMode) {
-      console.log("Edit Version Btns should display");
-      this.setState({ editMode : true });
-    } else {
-      this.setState({ editMode : false })
-    }
-  }
-  deleteMode() {
-    if (!this.state.deleteMode) {
-      console.log("Delete Version Btns should display");
-      this.setState({ deleteMode : true });
-    } else {
-      this.setState({ deleteMode : false })
-    }
   }
   deleteVersion(versionToDelete) {
     console.log('Search Partner : '+this.state.partnerid+' and Delete Version key: '+JSON.stringify(versionToDelete));
