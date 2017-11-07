@@ -10,10 +10,10 @@ class PartnerAdd extends Component {
         name : '',
         logo : '',
         sitetype : '',
-        vurl : 'http://psdcovers.s3.amazonaws.com/wp-content/uploads/2015/09/CAN021r4.jpg',
+        vurl : 'img/CAN021r4.jpg',
         vdate : '',
         vstatus : 'NEW',
-        vcomment : 'Gathering Tools...',
+        vcomment : 'Gathering Tools...'
       }
     }
     this.partnersFBDB = firebase.database().ref().child('partners');
@@ -45,7 +45,12 @@ class PartnerAdd extends Component {
         vdate : this.state.partner.vdate,
         vstatus : this.state.partner.vstatus,
         vcomment : this.state.partner.vcomment,
-      },]
+      }],
+      jiratickets : [{
+        jiranum : '',
+        jiradesc : '',
+        jirastate : ''
+      }]
     }
     console.log('newPartner : '+JSON.stringify(newPartner)+' - '+newPartner.name+ ' - '+this.state.partner.name)
     this.props.onPartnerAdded(newPartner);

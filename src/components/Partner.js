@@ -11,12 +11,12 @@ class Partner extends Component {
   }
   partnerUpdate(partnerid, what, newValue) {
     const dataSync = this.props.partner;
-    dataSync['versions'] = newValue;
+    dataSync[what] = newValue;
     console.log('about to record '+what+' update to FBDB for partner ID : '+partnerid+'  - '+what+' newValue : '+JSON.stringify(newValue));
     console.log(JSON.stringify(dataSync));
 
     const partnersFBDB = firebase.database().ref().child('partners');
-    return partnersFBDB.child(dataSync.fbdbkey).child('versions').set(newValue);
+    return partnersFBDB.child(dataSync.fbdbkey).child(what).set(newValue);
     // const partnerRef = partnerKey.child('versions').set(newValue);
   }
   render(){

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PartnerMockup from './PartnerMockup';
 
 class PartnerMockups extends Component {
@@ -90,11 +91,13 @@ class PartnerMockups extends Component {
       <div className="section section-mockups">
         <div className="header">
           <h3>Mockups</h3>
-          <div className="btn-group">
-            { AddBtn }
-            { JSON.stringify(this.state.versions) !== "[]" ? EditBtn : null }
-            { JSON.stringify(this.state.versions) !== "[]" ? DeleteBtn : null }
-          </div>
+          { this.props.location.pathname.indexOf("/admin/") !== -1 ?
+            <div className="btn-group">
+              { AddBtn }
+              { JSON.stringify(this.state.versions) !== "[]" ? EditBtn : null }
+              { JSON.stringify(this.state.versions) !== "[]" ? DeleteBtn : null }
+            </div>
+          : null }
         </div>
         <ul className="versions">
           { this.state.showNewVersionForm ?
@@ -114,4 +117,5 @@ class PartnerMockups extends Component {
   }
 }
 
-export default PartnerMockups;
+const PartnerMockupsWithRouter = withRouter(PartnerMockups);
+export default PartnerMockupsWithRouter;

@@ -30,8 +30,7 @@ class App extends Component {
         this.partnersFBDB.child(partnerDBKey).remove();
         break;
       default:
-        console.log("mmh.. you shouldn't be here...")
-        break;
+        console.log("mmh.. shouldn't pass here...");
     }
     this.initState();
   }
@@ -65,7 +64,7 @@ class App extends Component {
             const PartnerSection = () => { // console.log("building route for : "+partner.name);
               return ( <Partner key={partner.fbdbkey} partner={partner}/> );
             }
-            return ( <Route key={partner.fbdbkey} path={`/${partner.name.split(' ').join('')}/`} partner={partner} component={ PartnerSection } /> );
+            return ( <Route key={partner.fbdbkey} path={`/${partner.name.split(' ').join('')}/`} component={ PartnerSection } /> );
           })
         })
         console.log('partnersFBDB :'+this.partnersFBDB);
@@ -89,6 +88,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path="/" render={ PartnersList } />
+            <Route exact path="/admin/" render={ PartnersList } />
             {/* <Route exact path="/add" render={ AddPartner } /> */}
             { this.state.PartnersHTMLRoutes }
           </Switch>

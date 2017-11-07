@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import * as firebase from "firebase";
 
 import PartnerBadge from './PartnerBadge';
@@ -82,8 +83,10 @@ class Partners extends Component {
 
   componentWillMount() {
     console.log("this.props.partners : "+this.props.partners);
-    this.setState({ partners : this.props.partners })
+    console.log("this.props.location : "+JSON.stringify(this.props.location));
+    this.setState({ partners : this.props.partners });
   }
+
   render(){
     this.state.partners.forEach( partner => {
       if (this.state.partnerTypes.indexOf(partner.sitetype) === -1) this.state.partnerTypes.push(partner.sitetype);
@@ -98,11 +101,13 @@ class Partners extends Component {
       <div className="section section-row section-partners">
         <div className="header">
           <h3>Partners</h3>
-          <div className="btn-group">
-            <a className={ this.state.showNewPartnerForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.newPartnerForm.bind(this) }>+</a>
-            <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode.bind(this) }>...</a>
-            <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode.bind(this) }>\<u>*</u>/</a>
-          </div>
+          { this.props.location.pathname === "/admin/" ?
+              <div className="btn-group">
+                <a className={ this.state.showNewPartnerForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.newPartnerForm.bind(this) }>+</a>
+                <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode.bind(this) }>...</a>
+                <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode.bind(this) }>\<u>*</u>/</a>
+              </div>
+            : null }
         </div>
         <div id="partners" className="partners">
           <div className="form-components filter-components">
@@ -127,4 +132,5 @@ class Partners extends Component {
   }
 }
 
-export default Partners;
+const PartnersWithRouter = withRouter(Partners);
+export default PartnersWithRouter;
