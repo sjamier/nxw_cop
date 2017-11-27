@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Saira:400,500,600");
+body, html, ul, li, h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
+
+ul, li { list-style: none; }
+
+body { font-family: 'Saira', Arial, sans-serif; max-width: none; background-color: #f7f7f7; }
+
+form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-between; }
+form input[type="text"], form textarea { min-height: 40px; border: 1px solid #aaa; flex: 1; }
+form select { font-size: 12px; height: 40px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px; }
+form select option:hover { background: #000; }
+form .form-group { margin: 0; }
+#partner-breeder form, #partner-editor form { margin-top: 0; flex-direction: column; }
+
+input[type="text"] { padding-left: 5px; }
+
+#partners { max-width: 1500px; }
+
+.btn { background: #f7f7f7; background: -moz-linear-gradient(top, #f7f7f7 0%, #dcdcdc 100%); background: -webkit-linear-gradient(top, #f7f7f7 0%, #dcdcdc 100%); background: linear-gradient(to bottom, #f7f7f7 0%, #dcdcdc 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gcolor1', endColorstr='$gcolor2',GradientType=0 ); border-radius: 0; }
+.btn.btn-sign { font-size: 17px; font-weight: 400; color: #aaa; line-height: .5em; padding: 6px 7px 10px; border: 1px solid #dcdcdc; }
+.btn.btn-sign:hover { color: #555; }
+.btn.btn-sign.lowered-sign { font-size: 12px; padding: 9px 7px; }
+.btn.btn-sign.pushed { color: #555; background: #eee; background: -moz-linear-gradient(top, #eee 0%, #fff 100%); background: -webkit-linear-gradient(top, #eee 0%, #fff 100%); background: linear-gradient(to bottom, #eee 0%, #fff 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gcolor1', endColorstr='$gcolor2',GradientType=0 ); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.125) inset; }
+
+.container .jumbotron { border-radius: 3px; }
+
+.main > .header { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #2f2f2f url("../img/john-towner-128480.jpg") no-repeat center; background-size: 100% auto; background-blend-mode: lighten; }
+.header img { max-width: 150%; position: absolute; top: -80px; left: -20px; }
+.header h1 { font-size: 40px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left; }
+.header .btn-group { margin: 0 20px; }
+.header .btn-group:before, .header .btn-group:after { content: ""; width: 3px; height: 26px; border: 1px solid #aaa; display: inline-block; vertical-align: middle; }
+.header .btn-group:before { margin-right: 3px; border-right: 0; }
+.header .btn-group:after { margin-left: 3px; border-left: 0; }
+
+.sections { display: flex; flex-wrap: wrap; }
+
+.section { flex-grow: 1; }
+.section > .header { margin: 20px 0 15px; display: flex; align-items: center; }
+.section .btn-group { position: relative; }
+.section .btn-group > .btn { float: none; }
+.section .btn-group > .btn:active { background-color: #f7f7f7; }
+.section .btn-group .btn + .btn { margin-left: 3px; }
+
+.form-components { padding: 10px 10px 15px; background-color: #eee; }
+.form-components.filter-components { margin-bottom: 20px; }
+.form-components h4 { line-height: 1em; padding: 0 0 8px 0; margin: 0 0 12px; border-bottom: 1px solid #aaa; }
+
+.partners > ul { display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+.partners > ul > li:hover { cursor: pointer; }
+
+.partner-badge { margin: 0 auto 15px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
+.partner-badge .btn-group { position: absolute; top: -5px; right: 5px; }
+
+.partner-header { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+
+.partner-logo { text-align: center; width: 90%; padding: 10px; align-self: center; flex: 4; display: flex; justify-content: center; }
+.partner-logo img { font-size: 25px; font-weight: 600; color: #bbb; text-shadow: -1px -1px 0 #999, 1px 1px 0 #fff; line-height: .8em; width: auto; max-width: 100%; max-height: 45px; align-self: center; }
+
+.partner-id { font-size: 10px; padding: 2px 10px; margin-top: 10px; flex: 1; display: flex; justify-content: center; align-items: flex-end; }
+
+.partner-type { font-size: 10px; color: #fff; padding: 2px 10px 1px; margin-left: -10px; background-color: #732673; border-radius: 2px; position: absolute; top: 5px; left: 5px; }
+
+.versions, .tickets { list-style-type: none; margin: 0; vertical-align: middle; display: flex; flex-wrap: wrap; }
+
+.version, .ticket { min-height: 40px; margin: 0 10px 5px; background-color: #e9e9e9; border: 1px solid #fff; flex-basis: 100%; display: flex; flex-grow: 1; }
+.version a.btn-sign, .ticket a.btn-sign { margin: 0; flex-grow: 0; display: flex; align-items: center; }
+.version form, .ticket form { flex-wrap: wrap; margin: 0; }
+.version a, .ticket a { font-size: 14px; text-decoration: none; flex-grow: 1; display: flex; justify-content: space-between; }
+.version a > *, .ticket a > * { padding: 5px 8px; display: flex; align-items: center; }
+
+.version:hover { background-color: #fff; border: 1px solid #ddd; }
+.version:hover .version-comment { color: #222; }
+.version form .vdate { width: 0; flex-grow: 1; flex-shrink: 0; flex-basis: 95px; }
+.version form .vstatus { width: 0; flex-grow: 1; flex-shrink: 1; flex-basis: 20%; }
+.version form .vurl { flex-grow: 2; flex-shrink: 1; flex-basis: 60%; }
+.version form .vcomment { flex-grow: 4; flex-shrink: 1; flex-basis: 75%; }
+
+.version-date { width: 95px; color: #000; line-height: 1em; flex-shrink: 0; }
+
+.version-status, .jira-status { font-size: 11px; font-weight: bold; color: #FFF; background-color: #000; width: 45px; }
+.version-status.ok, .jira-status.ok { background-color: #183; }
+.version-status.ok:before, .jira-status.ok:before { content: "OK"; }
+.version-status.ok.old, .jira-status.ok.old { background-color: #040; }
+.version-status.nok, .jira-status.nok { background-color: #911; }
+.version-status.nok:before, .jira-status.nok:before { content: "NOK"; }
+.version-status.wip, .jira-status.wip { background-color: #e82; }
+.version-status.wip:before, .jira-status.wip:before { content: "WIP"; }
+
+.version-comment, .jira-desc { font-size: 10px; color: #679; background-color: rgba(0, 0, 0, 0.04); border-left: 1px solid #fff; flex-grow: 1; flex-shrink: 1; }
+
+.ticket:hover { background-color: #fff; border: 1px solid #ddd; }
+.ticket:hover .jira-desc { color: #222; }
+.ticket form .jiranum { width: 0; flex-grow: 1; flex-shrink: 0; flex-basis: 95px; }
+.ticket form .jirastatus { width: 0; flex-grow: 1; flex-shrink: 1; flex-basis: 20%; }
+.ticket form .jiradesc { flex-grow: 4; flex-shrink: 1; flex-basis: 75%; }
+
+@media (min-width: 600px) { .form-components { padding: 10px 20px 15px; display: flex; }
+  .form-components h4 { padding: 10px 20px 10px 0; margin: 5px 20px 0 0; border-bottom: none; border-right: 1px solid #aaa; }
+  .form-components form { flex: 4; }
+  .header img { max-width: 130%; top: -140px; left: 0; }
+  .partner-badge { flex: 0 1 47%; } }
+@media (min-width: 768px) { .section:not(.section-row) { width: 48%; }
+  .section:not(.section-row).section-mockups { margin-right: 20px; }
+  .header img { max-width: 130%; top: -200px; }
+  .partner-badge { flex-basis: 30%; }
+  .version-status, .jira-status { font-size: 0; max-width: 0; transition: all .2s ease-in-out; }
+  .version:hover .version-status, .ticket:hover .jira-status { font-size: 11px; max-width: 45px; } }
+@media (min-width: 992px) { .header img { max-width: 130%; top: -300px; }
+  .partner-badge { flex-basis: 22%; } }
+@media (min-width: 1200px) { .header img { max-width: 110%; top: -300px; } }
+@media (min-width: 1400px) { .section:not(.section-row) { width: 31%; }
+  .partner-badge { flex-basis: 18%; } }
+
+/*# sourceMappingURL=App.css.map */
