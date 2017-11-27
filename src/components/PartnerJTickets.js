@@ -41,13 +41,13 @@ class PartnerJTickets extends Component {
 
   newTicket(e) {
     e.preventDefault();
-    if (this.state.newTicket.vdate !== '' && this.state.newTicket.jiradesc !== '') {
+    if (this.state.newTicket.jiranum !== '') {
       // console.log("New Ticket Ticket Added");
       const stateTickets = this.state.jiratickets;
       stateTickets.push(this.state.newTicket);
       this.setState({ jiratickets : stateTickets })
       this.props.onTicketsChange(this.state.jiratickets);
-      const stateInit =  { jiradesc : '', vdate : '', jiranum : '', jirastatus : '', };
+      const stateInit =  { jiradesc : '', jiranum : '', jirastatus : '', };
       this.setState({ showNewTicketForm: false, newTicket : stateInit });
     }
   }

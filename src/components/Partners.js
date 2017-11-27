@@ -101,7 +101,7 @@ class Partners extends Component {
       <div className="section section-row section-partners">
         <div className="header">
           <h3>Partners</h3>
-          { this.props.location.pathname === "/admin/" ?
+          { this.props.location.pathname === "/nxw_cop/admin/" ?
               <div className="btn-group">
                 <a className={ this.state.showNewPartnerForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.newPartnerForm.bind(this) }>+</a>
                 <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode.bind(this) }>...</a>

@@ -16,7 +16,7 @@ class PartnerBadge extends Component {
   }
 
   onClick(e){
-    if (this.props.clickable) this.props.history.push(`/${this.props.partner.name.split(' ').join('')}`);
+    if (this.props.clickable) this.props.history.push(`/nxw_cop/${this.props.partner.name.split(' ').join('')}`);
   }
   onEditPartner(e) {
     this.setState({ showPartnerEditForm : !this.state.showPartnerEditForm });

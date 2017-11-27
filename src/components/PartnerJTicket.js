@@ -70,9 +70,9 @@ class PartnerTicket extends Component {
       this.state.showEditTicketForm ?
       <li className="ticket">
         <form className="editTicket" action="POST" onSubmit={ this.onEditTicket }>
-          <input name='jiranum' className="jiranum" type="text" value={ this.state.ticket.jiranum }  onChange={ this.onUpdateStateTicket } placeholder="Url" />
-          <textarea name='jirastatus' className="jirastatus" value={ this.state.ticket.jirastatus }  onChange={ this.onUpdateStateTicket } placeholder="Comment" />
-          <input name='jiradesc' className="jiradesc" type="text" value={ this.state.ticket.jiradesc }  onChange={ this.onUpdateStateTicket } placeholder="Status" />
+          <input name='jiranum' className="jiranum" type="text" value={ this.state.ticket.jiranum }  onChange={ this.onUpdateStateTicket } placeholder="Number" />
+          <textarea name='jirastatus' className="jirastatus" value={ this.state.ticket.jirastatus }  onChange={ this.onUpdateStateTicket } placeholder="Status" />
+          <input name='jiradesc' className="jiradesc" type="text" value={ this.state.ticket.jiradesc }  onChange={ this.onUpdateStateTicket } placeholder="Short Description" />
           <input type="submit" value="OK" />
         </form>
       </li>

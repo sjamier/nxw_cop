@@ -64,7 +64,7 @@ class App extends Component {
             const PartnerSection = () => { // console.log("building route for : "+partner.name);
               return ( <Partner key={partner.fbdbkey} partner={partner}/> );
             }
-            return ( <Route key={partner.fbdbkey} path={`/${partner.name.split(' ').join('')}/`} component={ PartnerSection } /> );
+            return ( <Route key={partner.fbdbkey} path={`/nxw_cop/${partner.name.split(' ').join('')}/`} component={ PartnerSection } /> );
           })
         })
         console.log('partnersFBDB :'+this.partnersFBDB);
@@ -87,8 +87,8 @@ class App extends Component {
             <h1>Castor Onboarding Partners</h1>
           </div>
           <Switch>
-            <Route exact path="/" render={ PartnersList } />
-            <Route exact path="/admin/" render={ PartnersList } />
+            <Route exact path="/nxw_cop/" render={ PartnersList } />
+            <Route exact path="/nxw_cop/admin/" render={ PartnersList } />
             {/* <Route exact path="/add" render={ AddPartner } /> */}
             { this.state.PartnersHTMLRoutes }
           </Switch>
