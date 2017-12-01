@@ -9,7 +9,7 @@ class PartnerTypeSelect extends Component {
   onChange(e) {
     this.props.onFilterChange(e.target.value);
   }
-  render(){
+  render(){ 
     let thisOptions = this.props.typeOptions.map( filterOption => {
       return ( <option key={filterOption} value={filterOption}>{filterOption}</option> )
     });
