@@ -50,7 +50,11 @@ class PartnerAdd extends Component {
         jiranum : '',
         jiradesc : '',
         jirastate : ''
-      }]
+      }],
+      urlsprep : [{
+        country : '',
+        url: '',
+      }],
     }
     console.log('newPartner : '+JSON.stringify(newPartner)+' - '+newPartner.name+ ' - '+this.state.partner.name)
     this.props.onPartnerAdded(newPartner);
