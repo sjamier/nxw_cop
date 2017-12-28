@@ -12,6 +12,7 @@ class Partner extends Component {
   partnerUpdate(partnerid, what, newValue) {
     const dataSync = this.props.partner;
     dataSync[what] = newValue;
+    console.log('newValue :'+newValue);
     console.log('about to record '+what+' update to FBDB for partner ID : '+partnerid+'  - '+what+' newValue : '+JSON.stringify(newValue));
     console.log(JSON.stringify(dataSync));
 

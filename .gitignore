@@ -3,3 +3,4 @@ src/config/
 src/data/
 build/
 .sass-cache/
+.vscode/
