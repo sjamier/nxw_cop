@@ -72,18 +72,29 @@ class PartnerUrlsProd extends Component {
     this.props.onUrlsProdChange(dataSync);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.urlsprod !== undefined) {
       this.setState({ urlsprod : this.props.urlsprod })
     }
   }
   render() {
-    let partnerUrlsProd = this.state.urlsprod.map(
-        (partnerUrl,idx) => { return(<PartnerUrlProd key={idx} urlprod={partnerUrl} showEditBtns={this.state.editMode} showDeleteBtns={this.state.deleteMode} onUrlChange={ this.onUpdateUrl } onDeleteUrl={ this.onDeleteUrl }/>); }
-    );
+    let partnerUrlsProdSorted = this.state.urlsprod.sort((a,b) => {
+        if (a.country < b.country) return -1;
+        if (a.country > b.country) return 1;
+        return 0;
+      } );
+    let partnerUrlsProd = partnerUrlsProdSorted.map( (partnerUrl,idx) => { return(<PartnerUrlProd key={idx} urlprod={partnerUrl} siteType={ this.props.siteType } showEditBtns={this.state.editMode} showDeleteBtns={this.state.deleteMode} onUrlChange={ this.onUpdateUrl } onDeleteUrl={ this.onDeleteUrl }/>); } );
     let AddBtn = <a className={ this.state.showNewUrlForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onAddUrl }>+</a>;
     let EditBtn = <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode }>...</a>;
     let DeleteBtn = <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode }>\<u>*</u>/</a>;
+    let inputContext = "";
+    switch(this.props.siteType) {
+      case "IAP":
+          inputContext = "product";
+          break;
+      default:
+          inputContext = "country";
+    }
     return (
       <div className="section section-prodUrls">
         <div className="header">
@@ -100,8 +111,8 @@ class PartnerUrlsProd extends Component {
           { this.state.showNewUrlForm ?
             <li className="urlprod">
               <form className="newUrl" action="POST" onSubmit={ this.onNewUrl }>
-                <input name='country' className="country" value={ this.state.newUrl.country }  onChange={ this.onUpdateStateUrl } placeholder="Country" />
-                <input name='url' className="url" type="text" value={ this.state.newUrl.url }  onChange={ this.onUpdateStateUrl } placeholder="PREP url" />
+                <input type='text' name='country' className={inputContext} value={ this.state.newUrl.country } onChange={ this.onUpdateStateUrl } placeholder={ inputContext === 'country' ? 'Country code' : 'Product name' } />
+                <input type='text' name='url' className="url" value={ this.state.newUrl.url }  onChange={ this.onUpdateStateUrl } placeholder="PROD url" />
                 <input type="submit" value="OK" />
               </form>
             </li> : null }

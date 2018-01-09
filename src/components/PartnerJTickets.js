@@ -78,9 +78,12 @@ class PartnerJTickets extends Component {
     console.log('Tickets stated : '+this.state.jiratickets);
   }
   render() {
-    let partnerJiraTickets = this.state.jiratickets.map(
-        (partnerJTicket,idx) => { return(<PartnerJTicket key={idx} jiraticket={partnerJTicket} showEditBtns={this.state.editMode} showDeleteBtns={this.state.deleteMode} onTicketChange={ this.onUpdateTicket } onDeleteTicket={ this.onDeleteTicket }/>); }
-    );
+    let partnerJiraTicketsSorted = this.state.jiratickets.sort((a,b) => {
+        if (a.jiranum < b.jiranum) return -1;
+        if (a.jiranum > b.jiranum) return 1;
+        return 0;
+      } );
+    let partnerJiraTickets = partnerJiraTicketsSorted.map( (partnerJTicket,idx) => { return(<PartnerJTicket key={idx} jiraticket={partnerJTicket} showEditBtns={this.state.editMode} showDeleteBtns={this.state.deleteMode} onTicketChange={ this.onUpdateTicket } onDeleteTicket={ this.onDeleteTicket }/>); } );
     let AddBtn = <a className={ this.state.showNewTicketForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onAddTicket }>+</a>;
     let EditBtn = <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode }>...</a>;
     let DeleteBtn = <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode }>\<u>*</u>/</a>;

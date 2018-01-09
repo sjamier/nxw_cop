@@ -51,7 +51,7 @@ class PartnerUrlPrep extends Component {
     console.log("urlprep :"+JSON.stringify(this.state.urlprep));
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const currentData = {
       country : this.props.urlprep.country,
       url : this.props.urlprep.url,
@@ -61,19 +61,27 @@ class PartnerUrlPrep extends Component {
   render() {
     let EditBtn = this.props.showEditBtns ? <a className="btn btn-sign" onClick={ this.onEditClick }>{ this.state.showEditUrlForm ? 'x' : '...' }</a> : null;
     let DeleteBtn = this.props.showDeleteBtns ? <a className="btn btn-sign lowered-sign" onClick={ this.onDeleteClick }>X</a> : null;
+    let inputContext = "";
+    switch(this.props.siteType) {
+      case "IAP":
+          inputContext = "product";
+          break;
+      default:
+          inputContext = "country";
+    }
     return(
       this.state.showEditUrlForm ?
       <li className="urlprep">
         <form className="editUrl" action="POST" onSubmit={ this.onEditUrl }>
-          <input name='country' className="country" type="text" value={ this.state.urlprep.country }  onChange={ this.onUpdateStateUrl } placeholder="Country" />
-          <input name='url' className="url" type="text" value={ this.state.urlprep.url }  onChange={ this.onUpdateStateUrl } placeholder="PREP Url" />
+          <input type='text' name='country' className={inputContext} value={ this.state.urlprep.country }  onChange={ this.onUpdateStateUrl } placeholder={ inputContext === 'country' ? 'Country code' : 'Product name' } />
+          <input type='text' name='url' className="url" value={ this.state.urlprep.url }  onChange={ this.onUpdateStateUrl } placeholder="PREP Url" />
           <input type="submit" value="OK" />
         </form>
       </li>
     :
       <li className="urlprep">
         <a href={this.props.urlprep.url} target="_blank" rel="noopener noreferrer">
-          <div className="country"><span>{this.props.urlprep.country}</span></div>
+          <div className={inputContext}><span>{this.props.urlprep.country}</span></div>
           <div className="url">{this.props.urlprep.url}</div>
         </a>
         { EditBtn }{ DeleteBtn }

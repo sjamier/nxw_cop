@@ -71,7 +71,7 @@ class PartnerBadge extends Component {
           <div className="partner-header" onClick={this.onClick.bind(this)}>
             <div className="partner-logo"><img src={this.state.partner.logo} alt={this.state.partner.name} /></div>
             <h2 className="partner-id">{this.state.partner.name}</h2>
-            <div className="partner-type">{this.state.partner.sitetype}</div>
+            <div className={`partner-type ${this.state.partner.sitetype}`}>{this.state.partner.sitetype}</div>
           </div>
           { EditBtns }
         </WrapTag>

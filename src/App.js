@@ -84,7 +84,7 @@ class App extends Component {
       <Router>
         <div className="container main" data-reactroot="root">
           <div className="header jumbotron">
-            <h1>Castor Onboarding Partners</h1>
+            <h1>Customer Success Onboarding</h1>
           </div>
           <Switch>
             <Route exact path="/nxw_cop/" render={ PartnersList } />
