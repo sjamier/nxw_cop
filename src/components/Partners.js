@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import * as firebase from "firebase";
+import moment from 'moment';
 
 import PartnerBadge from './PartnerBadge';
 import PartnerAdd from './PartnerAdd';
@@ -9,7 +10,7 @@ class PartnerTypeSelect extends Component {
   onChange(e) {
     this.props.onFilterChange(e.target.value);
   }
-  render(){ 
+  render(){
     let thisOptions = this.props.typeOptions.map( filterOption => {
       return ( <option key={filterOption} value={filterOption}>{filterOption}</option> )
     });
@@ -37,6 +38,7 @@ class Partners extends Component {
   constructor() {
     super();
     this.state = ({
+      today : moment(new Date()),
       partners : {},
       partnerTypes : [],
       partnerTypeFilter : "ALL",
@@ -67,6 +69,7 @@ class Partners extends Component {
 
   onAddedPartner(newPartner) {
     console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.sitetype :'+newPartner.sitetype+' - newPartner.versions.vurl : '+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
+    newPartner.lastupdate = this.state.today.format("DD.MM.YYYY");
     this.partnersFBDB.push(newPartner);
     this.setState({ showNewPartnerForm : false })
   }
@@ -91,11 +94,27 @@ class Partners extends Component {
     this.state.partners.forEach( partner => {
       if (this.state.partnerTypes.indexOf(partner.sitetype) === -1) this.state.partnerTypes.push(partner.sitetype);
     });
-    const PartnersBadges = this.state.partners
+    const filteredPartners = this.state.partners
       .filter( partner => { return this.state.partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state.partnerTypeFilter; })
       .filter( partner => { return this.state.partnerNameFilter === "" ? partner : partner.name.toLowerCase().includes(this.state.partnerNameFilter.toLowerCase()); })
+    const PartnersBadgesRecent = filteredPartners
+      .filter( partner => { return moment(partner.lastupdate,'DD MM YYYY').isAfter(this.state.today.clone().subtract(30,'days')); })
       .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
-    console.log("NbResults: "+PartnersBadges.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
+    const PartnersBadgesWip = filteredPartners
+      .filter( partner => {
+        var isWip = false;
+        if ( partner.jiratickets !== undefined ) {
+          partner.jiratickets.forEach( jticket => { if (jticket.jirastatus === "wip") isWip = true ;})
+        }
+        return isWip;
+      })
+      .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
+    const PartnersBadgesProd = filteredPartners
+      .filter( partner => { return ( partner.urlsprod !== undefined ? true : false);})
+      .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
+    const PartnersBadgesAll = filteredPartners
+      .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
+    console.log("NbResults: "+PartnersBadgesAll.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
 
     return (
       <div className="section section-row section-partners">
@@ -108,6 +127,7 @@ class Partners extends Component {
                 <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode.bind(this) }>\<u>*</u>/</a>
               </div>
             : null }
+            <span className="date">{this.state.today.format('DD.MM.YYYY')}</span>
         </div>
         <div id="partners" className="partners">
           <div className="form-components filter-components">
@@ -117,10 +137,25 @@ class Partners extends Component {
               <PartnerNameSearchInput onFilterChange={this.onFilterNameChange.bind(this)}/>
             </form>
           </div>
-          <ul>
-            { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> : null }
-            { PartnersBadges }
-          </ul>
+          <div className="partners-lists">
+            <ul className="partners-recent">
+              <li className="list-separator">New/Recent Updates (30 days)</li>
+              { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> : null }
+              { PartnersBadgesRecent }
+            </ul>
+            <ul className="partners-progress">
+              <li className="list-separator">In Progress</li>
+              { PartnersBadgesWip }
+            </ul>
+            <ul className="partners-production">
+              <li className="list-separator">On Production</li>
+              { PartnersBadgesProd }
+            </ul>
+            <ul className="partners-all">
+              <li className="list-separator">All Partners</li>
+              { PartnersBadgesAll }
+            </ul>
+          </div>
         </div>
       </div>
     );

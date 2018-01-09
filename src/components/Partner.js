@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
+import moment from 'moment';
 
 import PartnerBadge from './PartnerBadge';
 import PartnerProfile from './PartnerProfile';
@@ -10,14 +11,17 @@ class Partner extends Component {
     this.onPartnerUpdate = this.partnerUpdate.bind(this);
   }
   partnerUpdate(partnerid, what, newValue) {
-    const dataSync = this.props.partner;
+    const dataSync = Object.assign({}, this.props.partner);
+    const FDBKey = dataSync.fbdbkey;
+    delete dataSync["fbdbkey"];
     dataSync[what] = newValue;
-    console.log('newValue :'+newValue);
-    console.log('about to record '+what+' update to FBDB for partner ID : '+partnerid+'  - '+what+' newValue : '+JSON.stringify(newValue));
+    dataSync.lastupdate = moment(new Date()).format('DD.MM.YYYY');
+    console.log('newValue :'+dataSync[what]+" - new Update Date : "+new Date());
+    console.log('about to record '+what+' update to FBDB for partner ID : '+partnerid+'  - '+what+' newValue : '+JSON.stringify(dataSync[what]));
     console.log(JSON.stringify(dataSync));
 
     const partnersFBDB = firebase.database().ref().child('partners');
-    return partnersFBDB.child(dataSync.fbdbkey).child(what).set(newValue);
+    return partnersFBDB.child(FDBKey).set(dataSync);
     // const partnerRef = partnerKey.child('versions').set(newValue);
   }
   render(){
