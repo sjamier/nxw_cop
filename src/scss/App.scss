@@ -38,7 +38,17 @@ input[type="text"]{ padding-left: 5px;}
     &.lowered-sign { font-size: 12px; padding: 9px 7px;}
     &.pushed { color: #555; @include grad-gen(#eee,#fff); box-shadow: 0 2px 2px rgba(0,0,0,.125) inset;}
   }
+  &.btn-default { color: #aaa; padding: 3px 10px;
+    &:hover { color: #000; background-position: 0 0;}
+    .btn-text { display: none;}
+  }
 }
+.btn-icon {
+  :before { margin-right: 5px; display: inline-block;}
+  &.back:before { content: '<-';}
+  + .btn-text { margin-left: 5px;}
+}
+
 
 .container .jumbotron { border-radius: 3px;}
 .header {
@@ -51,8 +61,10 @@ input[type="text"]{ padding-left: 5px;}
     &:after { margin-left: 3px; border-left: 0;}
   }
 }
-.sections { display: flex; flex-wrap: wrap; justify-content: space-between;}
-.section {
+.sections { position: relative; display: flex; flex-wrap: wrap;
+  > a.btn:first-child { position: absolute; top: -52px; left: 10px;}
+}
+.section { flex-grow: 1;
   >.header { padding-bottom: 10px; margin: 20px 0 15px; border-bottom: 1px solid #ccc; position: relative; display: flex; align-items: center;
     .date { font-size: 16px; color: #fff; position: absolute; right: 10px; top: -45px; text-align: right; flex-grow: 1;}
   }
@@ -93,7 +105,7 @@ input[type="text"]{ padding-left: 5px;}
 }
 
 .versions, .jiratickets, .urlsprep, .urlsprod { list-style-type: none; margin: 0; vertical-align: middle; display: flex; flex-wrap: wrap;}
-.version, .ticket, .urlprep, .urlprod { margin: 0 10px 5px; background-color: #e9e9e9; border: 1px solid #fff; flex-basis: 100%; display: flex; flex-grow: 1;
+.version, .ticket, .urlprep, .urlprod { margin: 0 0 5px; background-color: #e9e9e9; border: 1px solid #fff; flex-basis: 100%; display: flex; flex-grow: 1;
   a.btn-sign { margin: 0; flex-grow: 0; display: flex; align-items: center;}
   form { flex-wrap: wrap; margin: 0;}
   a { font-size: 14px; text-decoration: none; flex-grow: 1; display: flex; justify-content: space-between;}
@@ -165,8 +177,10 @@ input[type="text"]{ padding-left: 5px;}
   .partners ul.partners-recent .partner-badge, .partners ul.partners-progress .partner-badge { flex: 0 0 98%;}
 }
 @media (min-width: 768px) {
+  .btn.btn-default .btn-text { display: inline-block;}
+  .sections { justify-content: space-between;}
   .section:not(.section-row) { width: 48%;
-    &.section-mockups { margin-right: 20px;}
+    &:nth-child(even) { margin-right: 20px;}
   }
   .header img { max-width: 130%; top: -200px;}
   .partner-badge { flex-basis: 30%;}
