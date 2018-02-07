@@ -43,7 +43,7 @@ class PartnerProfile extends Component {
     console.log('this.props : '+this.props+'    -  this.state.siteType : '+this.state.siteType);
     return(
       <div className='sections profile-sections'>
-        <Button text='Back to partners list' path='/nxw_cop/' style='btn-default' icon='back'/>
+        <Button text='Partners list' path='/nxw_cop/' style='btn-default' icon='back'/>
         <PartnerMockups versions={this.state.mockupVersions} onMockupsChange={ this.onMockupsChange.bind(this) }/>
         <PartnerJTickets jiratickets={this.state.jiratickets} onTicketsChange={ this.onTicketsChange.bind(this) }/>
         <PartnerUrlsPrep urlsprep={this.state.urlsprep} siteType={ this.state.siteType } onUrlsPrepChange={ this.onUrlsPrepChange.bind(this) }/>

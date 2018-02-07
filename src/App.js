@@ -79,7 +79,6 @@ class App extends Component {
   render() {
     console.log("Rendering !!");
     const PartnersList = () => { return ( <Partners partners={this.state.partnersData}  onDBSyncTrigger={ this.onDBSyncTrigger.bind(this) } /> ); };
-    // const AddPartner = () => { return ( <PartnerAdd partners={this.state.partnersData} onPartnerAdded={ this.onPartnerAdded.bind(this) }/> ); };
     return (
       <Router>
         <div className="container main" data-reactroot="root">
@@ -89,7 +88,6 @@ class App extends Component {
           <Switch>
             <Route exact path="/nxw_cop/" render={ PartnersList } />
             <Route exact path="/nxw_cop/admin/" render={ PartnersList } />
-            {/* <Route exact path="/add" render={ AddPartner } /> */}
             { this.state.PartnersHTMLRoutes }
           </Switch>
         </div>

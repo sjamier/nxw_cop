@@ -16,7 +16,7 @@ class PartnerBadge extends Component {
   }
 
   onClick(e){
-    if (this.props.clickable) this.props.history.push(`/nxw_cop/${this.props.partner.name.split(' ').join('')}`);
+    if ((e.target.title.indexOf('Confluence') === -1) && (this.props.clickable)) this.props.history.push(`/nxw_cop/${this.props.partner.name.split(' ').join('')}`);
   }
   onEditPartner(e) {
     this.setState({ showPartnerEditForm : !this.state.showPartnerEditForm });
@@ -44,7 +44,7 @@ class PartnerBadge extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let statePartnerInit = this.props.partner;
     statePartnerInit.fbdbkey = this.props.partner.fbdbkey;
     this.setState({ partner : statePartnerInit });
@@ -62,7 +62,8 @@ class PartnerBadge extends Component {
           <form onSubmit={ this.onSubmit } >
             <input name="sitetype" type="text" placeholder="CART, STORE, ..." value={ this.state.partner.sitetype } onChange={ this.updateState } />
             <input name="name" type="text" placeholder="Name" value={ this.state.partner.name } onChange={ this.updateState } />
-            <input name="logo" type="text" placeholder="Logo" value={ this.state.partner.logo } onChange={ this.updateState } />
+            <input name="logo" type="text" placeholder="Logo Url" value={ this.state.partner.logo } onChange={ this.updateState } />
+            <input name="confluence" type="text" placeholder="Confluence Url" value={ this.state.partner.confluence } onChange={ this.updateState } />
             <input type="submit" value="OK"/>
           </form>
         </li>
@@ -72,6 +73,7 @@ class PartnerBadge extends Component {
             <div className="partner-logo"><img src={this.state.partner.logo} alt={this.state.partner.name} /></div>
             <h2 className="partner-id">{this.state.partner.name}</h2>
             <div className={`partner-type ${this.state.partner.sitetype}`}>{this.state.partner.sitetype}</div>
+            { (this.state.partner.confluence !== "") && (this.state.partner.confluence !== undefined) ?  <a className='partner-confluence' href={ this.state.partner.confluence } target="_blank" title="Confluence Doc">DOC</a> : null }
           </div>
           { EditBtns }
         </WrapTag>
