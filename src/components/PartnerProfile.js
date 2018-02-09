@@ -3,6 +3,7 @@ import PartnerMockups from './PartnerMockups';
 import PartnerJTickets from './PartnerJTickets';
 import PartnerUrlsPrep from './PartnerUrlsPrep';
 import PartnerUrlsProd from './PartnerUrlsProd';
+import PartnerConnectInfos from './PartnerConnectInfos';
 import Button from './Button';
 
 class PartnerProfile extends Component {
@@ -12,6 +13,7 @@ class PartnerProfile extends Component {
       partnerid : '',
       siteType :  '',
       mockupVersions : {},
+      connectInfos : {},
       jiratickets : {},
       urlsprep : {},
       urlsprod : {},
@@ -19,6 +21,9 @@ class PartnerProfile extends Component {
   }
   onMockupsChange(versions) {
     this.props.onProfileChange(this.state.partnerid, 'versions', versions);
+  }
+  onConnectInfosChange(connectInfos) {
+    this.props.onProfileChange(this.state.partnerid, 'connectInfos', connectInfos);
   }
   onTicketsChange(tickets) {
     this.props.onProfileChange(this.state.partnerid, 'jiratickets', tickets);
@@ -34,6 +39,7 @@ class PartnerProfile extends Component {
       partnerid : this.props.partner.id,
       siteType : this.props.partner.sitetype,
       mockupVersions : this.props.partner.versions,
+      connectInfos : this.props.partner.connectInfos,
       jiratickets : this.props.partner.jiratickets,
       urlsprep : this.props.partner.urlsprep,
       urlsprod : this.props.partner.urlsprod,
@@ -43,8 +49,11 @@ class PartnerProfile extends Component {
     console.log('this.props : '+this.props+'    -  this.state.siteType : '+this.state.siteType);
     return(
       <div className='sections profile-sections'>
-        <Button text='Partners list' path='/nxw_cop/' style='btn-default' icon='back'/>
-        <PartnerMockups versions={this.state.mockupVersions} onMockupsChange={ this.onMockupsChange.bind(this) }/>
+        <Button text='Partners list' path='/nxw_cop/' styleClass='btn-default' icon='back'/>
+        { this.state.siteType !== 'CONNECT' ?
+          <PartnerMockups versions={this.state.mockupVersions} onMockupsChange={ this.onMockupsChange.bind(this) }/>
+          : <PartnerConnectInfos connectInfos={this.state.connectInfos} onConnectInfosChange={ this.onConnectInfosChange.bind(this) }/>
+        }
         <PartnerJTickets jiratickets={this.state.jiratickets} onTicketsChange={ this.onTicketsChange.bind(this) }/>
         <PartnerUrlsPrep urlsprep={this.state.urlsprep} siteType={ this.state.siteType } onUrlsPrepChange={ this.onUrlsPrepChange.bind(this) }/>
         <PartnerUrlsProd urlsprod={this.state.urlsprod} siteType={ this.state.siteType } onUrlsProdChange={ this.onUrlsProdChange.bind(this) }/>
@@ -52,4 +61,5 @@ class PartnerProfile extends Component {
     );
   }
 }
+
 export default PartnerProfile;
