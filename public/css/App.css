@@ -3,6 +3,8 @@ body, html, ul, li, h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
 
 ul, li { list-style: none; }
 
+a { color: #008cd4; }
+
 body { font-family: 'Saira', Arial, sans-serif; max-width: none; background-color: #f7f7f7; }
 
 form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-between; }
@@ -42,7 +44,7 @@ input[type="text"] { padding-left: 5px; }
 .header .btn-group:after { margin-left: 3px; border-left: 0; }
 
 .sections { position: relative; display: flex; flex-wrap: wrap; }
-.sections > a.btn:first-child { position: absolute; top: -52px; left: 10px; }
+.sections > a.btn:first-child { position: absolute; top: -49px; left: 2px; }
 
 .section { flex-grow: 1; }
 .section > .header { padding-bottom: 10px; margin: 20px 0 15px; border-bottom: 1px solid #ccc; position: relative; display: flex; align-items: center; }
@@ -69,6 +71,8 @@ input[type="text"] { padding-left: 5px; }
 
 .partner-badge { margin: 0 auto 15px; background-color: #DDD; border-radius: 2px; display: flex; flex: 0 1 90%; position: relative; }
 .partner-badge .btn-group { position: absolute; top: -5px; right: 5px; }
+.partner-badge a.partner-confluence { text-indent: -999em; width: 25px; height: 24px; background: url(https://developer.atlassian.com/imgs/confluence.png) no-repeat; background-size: 85%; background-position: 2px 3px; border: 1px solid transparent; position: absolute; bottom: 5px; right: 8px; }
+.partner-badge a.partner-confluence:hover { background-color: #eee; border-color: #aaa; }
 
 .partner-header { padding-top: 20px; display: flex; flex-direction: column; flex-grow: 1; }
 
@@ -99,19 +103,29 @@ input[type="text"] { padding-left: 5px; }
 
 .version-date { width: 95px; color: #000; line-height: 1em; flex-shrink: 0; }
 
-.version-status, .jira-status { font-size: 11px; font-weight: bold; color: #FFF; background-color: #000; width: 45px; }
-.version-status.ok, .jira-status.ok { background-color: #183; }
-.version-status.ok:before, .jira-status.ok:before { content: "OK"; }
-.version-status.ok.old, .jira-status.ok.old { background-color: #040; }
-.version-status.nok, .jira-status.nok { background-color: #911; }
-.version-status.nok:before, .jira-status.nok:before { content: "NOK"; }
-.version-status.wip, .jira-status.wip { background-color: #e82; }
-.version-status.wip:before, .jira-status.wip:before { content: "WIP"; }
+.version-status, .jira-status { font-size: 11px; font-weight: bold; color: #FFF; width: 45px; background-color: #000; }
+
+.version-status.ok { background-color: #183; }
+.version-status.ok:before { content: "OK"; }
+.version-status.ok.old { background-color: #040; }
+.version-status.nok { background-color: #911; }
+.version-status.nok:before { content: "NOK"; }
+.version-status.wip { background-color: #e82; }
+.version-status.wip:before { content: "WIP"; }
+
+.jira-status.pending { background-color: #298bb5; }
+.jira-status.pending:before { content: "PENDING"; }
+.jira-status.wip { background-color: #e82; }
+.jira-status.wip:before { content: "WIP"; }
+.jira-status.ready { background-color: #183; }
+.jira-status.ready:before { content: "READY"; }
+.jira-status.closed { background-color: #666; }
+.jira-status.closed:before { content: "CLOSED"; }
 
 .version-comment, .jira-desc, .url { font-size: 10px; color: #679; background-color: rgba(0, 0, 0, 0.04); border-left: 1px solid #fff; flex-grow: 1; flex-shrink: 1; }
 
 .ticket .jira-number { flex: 0 0 90px; }
-.ticket .jira-status { flex: 0 0 50px; }
+.ticket .jira-status { flex: 0 0 65px; }
 .ticket:hover { background-color: #fff; border: 1px solid #ddd; }
 .ticket:hover .jira-desc { color: #222; }
 .ticket form .jiranum { width: 0; flex: 0 0 90px; }
@@ -140,7 +154,8 @@ input[type="text"] { padding-left: 5px; }
   .header img { max-width: 130%; top: -200px; }
   .partner-badge { flex-basis: 30%; }
   .version-status, .jira-status { font-size: 0; max-width: 0; transition: all .2s ease-in-out; }
-  .version:hover .version-status, .ticket:hover .jira-status { font-size: 11px; max-width: 45px; } }
+  .version:hover .version-status { font-size: 11px; max-width: 45px; }
+  .ticket:hover .jira-status { font-size: 11px; max-width: 65px; } }
 @media (min-width: 992px) { .header img { max-width: 130%; top: -300px; }
   .partner-badge { flex-basis: 22%; }
   .partners ul.partners-recent .partner-badge, .partners ul.partners-progress .partner-badge { flex: 0 0 47%; } }
