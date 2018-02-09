@@ -6,7 +6,7 @@ class Button extends Component {
     this.state = {
       text : '',
       path : '',
-      style : '',
+      styleClass : '',
       icon : '',
     }
   }
@@ -15,12 +15,12 @@ class Button extends Component {
     this.setState({
       text : this.props.text,
       path : this.props.path,
-      style : this.props.style,
+      styleClass : this.props.styleClass,
       icon : this.props.icon,
     })
   }
   render(){
-    return <a href={`${this.state.path}`} className={`btn ${this.state.style}`} target='_self'><span className={`btn-icon ${this.state.icon}`}></span><span className='btn-text'>{ this.state.text }</span></a>
+    return <a href={`${this.state.path}`} className={`btn ${this.state.styleClass}`} target='_self'><span className={`btn-icon ${this.state.icon}`}></span><span className='btn-text'>{ this.state.text }</span></a>
   }
 }
 

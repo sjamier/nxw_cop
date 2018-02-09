@@ -19,8 +19,8 @@ a { color: #008cd4;}
 
 body { font-family: 'Saira', Arial, sans-serif; max-width: none; background-color: #f7f7f7;}
 form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-between;
-  input[type="text"], textarea { min-height: 40px; border: 1px solid #aaa; flex: 1;}
-  select { font-size: 12px; height: 40px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px;
+  input[type="text"], textarea { min-height: 40px; border: 1px solid #ccc; flex: 1;}
+  select { font-size: 12px; height: 44px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px;
     option {
       &:hover { background: #000;}
     }
@@ -56,12 +56,14 @@ input[type="text"]{ padding-left: 5px;}
   .main>& { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #2f2f2f url($badgeImg) no-repeat center; background-size: 100% auto; background-blend-mode: lighten;}
   img { max-width: 150%; position: absolute; top: -80px; left: -20px;}
   h1 { font-size: 40px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left;}
+  h4 { font-size: 20px; padding: 8px 0 8px 10px; margin-bottom: 10px; background-color: #eee;}
   .btn-group { margin: 0 20px;
     &:before, &:after { content: ""; width: 3px; height: 26px; border: 1px solid #aaa; display: inline-block; vertical-align: middle;}
     &:before { margin-right: 3px; border-right: 0;}
     &:after { margin-left: 3px; border-left: 0;}
   }
 }
+
 .sections { position: relative; display: flex; flex-wrap: wrap;
   > a.btn:first-child { position: absolute; top: -49px; left: 2px;}
 }
@@ -76,6 +78,12 @@ input[type="text"]{ padding-left: 5px;}
     .btn+.btn { margin-left: 3px;}
   }
   &.section-partners { margin-bottom: 30px;}
+}
+.subsection { margin-bottom: 20px;
+  li { font-size: 14px; color: #fff; padding: 2px 8px; margin: 0 5px 5px 0; background-color: #bbb; display: inline-block; border-radius: 3px;
+    &.activated { background-color: #016561;}
+    &.clickable { cursor: pointer;}
+  }
 }
 
 .form-components { padding: 10px 10px 15px; background-color: #eee;
@@ -106,6 +114,7 @@ input[type="text"]{ padding-left: 5px;}
 .partner-id { font-size: 10px; padding: 2px 10px; margin-top: 10px; flex: 1; display: flex; justify-content: center; align-items: flex-end;}
 .partner-type { font-size: 10px; color: #fff; padding: 2px 10px 1px; margin-left: -10px; background-color: #014065; border-radius: 2px; position: absolute; top: 5px; left: 5px;
   &.IAP { background: #732673;}
+  &.CONNECT { background: #016561;}
 }
 
 .versions, .jiratickets, .urlsprep, .urlsprod { list-style-type: none; margin: 0; vertical-align: middle; display: flex; flex-wrap: wrap;}
