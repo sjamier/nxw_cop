@@ -20,6 +20,7 @@ a { color: #008cd4;}
 body { font-family: 'Saira', Arial, sans-serif; max-width: none; background-color: #f7f7f7;}
 form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-between;
   input[type="text"], textarea { min-height: 40px; border: 1px solid #ccc; flex: 1;}
+  &#filtersForm input[type="text"] { width: 0;}
   select { font-size: 12px; height: 44px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px;
     option {
       &:hover { background: #000;}
@@ -53,9 +54,9 @@ input[type="text"]{ padding-left: 5px;}
 
 .container .jumbotron { border-radius: 3px;}
 .header {
-  .main>& { max-height: 340px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #2f2f2f url($badgeImg) no-repeat center; background-size: 100% auto; background-blend-mode: lighten;}
+  .main>& { max-height: 340px; padding-top: 20px; margin: 15px 0 10px; overflow: hidden; position: relative; background: #2f2f2f url($badgeImg) no-repeat center; background-size: 100% auto; background-blend-mode: lighten;}
   img { max-width: 150%; position: absolute; top: -80px; left: -20px;}
-  h1 { font-size: 40px; font-weight: 500; color: #fff; padding: 10px 10px 0; margin: 0; position: relative; float: left;}
+  h1 { font-size: 40px; font-weight: 500; color: #fff; max-width: 10px; padding: 10px 10px 0; margin: 0; position: relative;}
   h4 { font-size: 20px; padding: 8px 0 8px 10px; margin-bottom: 10px; background-color: #eee;}
   .btn-group { margin: 0 20px;
     &:before, &:after { content: ""; width: 3px; height: 26px; border: 1px solid #aaa; display: inline-block; vertical-align: middle;}
@@ -67,7 +68,7 @@ input[type="text"]{ padding-left: 5px;}
 .sections { position: relative; display: flex; flex-wrap: wrap;
   > a.btn:first-child { position: absolute; top: -49px; left: 2px;}
 }
-.section { flex-grow: 1;
+.section { flex-grow: 1; flex-basis: 100%;
   >.header { padding-bottom: 10px; margin: 20px 0 15px; border-bottom: 1px solid #ccc; position: relative; display: flex; align-items: center;
     .date { font-size: 16px; color: #fff; position: absolute; right: 10px; top: -45px; text-align: right; flex-grow: 1;}
   }
@@ -180,9 +181,9 @@ input[type="text"]{ padding-left: 5px;}
 }
 
 .urlprep, .urlprod {
-  .product { flex-basis: 120px;}
+  .product { flex-basis: 30%;}
   .country { flex: 0 0 40px;}
-  .url { flex: 1 1 70%;}
+  .url { flex: 1 1 70%; word-break: break-all;}
   &:hover { background-color: #fff; border: 1px solid #ddd;
     .url { color: #222;}
   }
@@ -191,14 +192,24 @@ input[type="text"]{ padding-left: 5px;}
   }
 }
 
-@media (min-width: 425px) {
-  .section>.header .date { color: #333; position: relative; top: auto;}
+.displayAsList {
+  .partner-badge { margin-bottom: 5px;}
+  .partner-header { padding: 5px 0;}
+  .partner-logo { display: none;}
+  .partner-id { font-size: 12px; margin-top: 0; margin-left: 55px; flex-direction: column; align-self: flex-start;}
+  .partner-badge a.partner-confluence { right: 2px; bottom: 2px;}
 }
+.displayBtns { margin-bottom: 10px;
+  > a { padding: 0 20px; background: #ddd; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,.3); cursor: pointer;}
+}
+
+
 @media (min-width: 600px) {
   .form-components { padding: 10px 20px 15px; display: flex;
     h4 { padding: 10px 20px 10px 0; margin: 5px 20px 0 0; border-bottom: none; border-right: 1px solid #aaa;}
     form { flex: 4;}
   }
+  .displayBtns { margin-bottom: 0;}
   .header img { max-width: 130%; top: -140px; left: 0;}
   .partners ul.partners-recent, .partners ul.partners-progress { flex: 0 0 49%;}
   .partner-badge { flex: 0 1 47%;}
@@ -207,11 +218,12 @@ input[type="text"]{ padding-left: 5px;}
 @media (min-width: 768px) {
   .btn.btn-default .btn-text { display: inline-block;}
   .sections { justify-content: space-between;}
-  .section:not(.section-row) { width: 48%;
+  .section:not(.section-row) { flex-basis: 48%;
     &:nth-child(even) { margin-right: 20px;}
   }
   .header img { max-width: 130%; top: -200px;}
   .partner-badge { flex-basis: 30%;}
+  .displayAsList .partner-badge { flex-basis: 48%;}
   .version-status, .jira-status { font-size: 0; max-width: 0; transition: all .2s ease-in-out;}
   .version:hover .version-status { font-size: 11px; max-width: 45px;}
   .ticket:hover .jira-status { font-size: 11px; max-width: 65px;}
@@ -219,7 +231,9 @@ input[type="text"]{ padding-left: 5px;}
 @media (min-width: 992px) {
   .header img { max-width: 130%; top: -300px;}
   .partner-badge { flex-basis: 22%;}
+  .displayAsList .partner-badge { flex-basis: 48%;}
   .partners ul.partners-recent .partner-badge, .partners ul.partners-progress .partner-badge { flex: 0 0 47%;}
+  .partners .displayAsList ul.partners-recent .partner-badge, .partners .displayAsList ul.partners-progress .partner-badge { flex-basis: 98%;}
 }
 @media (min-width: 1200px) {
   .header img { max-width: 110%; top: -300px;}
@@ -227,4 +241,5 @@ input[type="text"]{ padding-left: 5px;}
 @media (min-width: 1400px) {
   // .section:not(.section-row) { width: 31%;}
   .partner-badge { flex-basis: 18%;}
+  .displayAsList .partner-badge { flex-basis: 31%;}
 }

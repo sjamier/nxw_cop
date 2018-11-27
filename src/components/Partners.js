@@ -46,6 +46,7 @@ class Partners extends Component {
       showNewPartnerForm : false,
       editMode : false,
       deleteMode : false,
+      displayAsGrid : true,
     });
     this.partnersFBDB = firebase.database().ref().child('partners');
     this.onEditedPartner = this.onEditedPartner.bind(this);
@@ -57,6 +58,16 @@ class Partners extends Component {
 
   onFilterTypeChange(newVal) { this.setState({ partnerTypeFilter : newVal }); }
   onFilterNameChange(newVal) { this.setState({ partnerNameFilter : newVal }); }
+
+  displayAsGrid() {
+    this.setState({displayAsGrid: true});
+    console.log("As Grid !");
+  }
+
+  displayAsList() {
+    this.setState({displayAsGrid: false});
+    console.log("As List !");
+  }
 
   newPartnerForm(e) {
     if (!this.state.showNewPartnerForm) {
@@ -137,7 +148,11 @@ class Partners extends Component {
               <PartnerNameSearchInput onFilterChange={this.onFilterNameChange.bind(this)}/>
             </form>
           </div>
-          <div className="partners-lists">
+          <div className="displayBtns">
+            {this.state.displayAsGrid &&  <a className="displayAsList" onClick={ this.displayAsList.bind(this)}>Display as List</a>}
+            {!this.state.displayAsGrid &&  <a className="displayAsGrid" onClick={ this.displayAsGrid.bind(this)}>Display as Grid</a>}
+          </div>
+          <div className={this.state.displayAsGrid?"partners-lists displayAsGrid":"partners-lists displayAsList"}>
             <ul className="partners-recent">
               <li className="list-separator">New/Recent Updates (30 days)</li>
               { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> : null }
