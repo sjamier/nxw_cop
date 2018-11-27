@@ -55,8 +55,8 @@ class PartnerProfile extends Component {
           : <PartnerConnectInfos connectInfos={this.state.connectInfos} onConnectInfosChange={ this.onConnectInfosChange.bind(this) }/>
         }
         <PartnerJTickets jiratickets={this.state.jiratickets} onTicketsChange={ this.onTicketsChange.bind(this) }/>
-        <PartnerUrlsPrep urlsprep={this.state.urlsprep} siteType={ this.state.siteType } onUrlsPrepChange={ this.onUrlsPrepChange.bind(this) }/>
-        <PartnerUrlsProd urlsprod={this.state.urlsprod} siteType={ this.state.siteType } onUrlsProdChange={ this.onUrlsProdChange.bind(this) }/>
+        { (this.state.siteType === 'CART' || this.state.siteType === 'STORE') && <PartnerUrlsPrep urlsprep={this.state.urlsprep} siteType={ this.state.siteType } onUrlsPrepChange={ this.onUrlsPrepChange.bind(this) }/> }
+      { !(this.state.siteType === 'CONNECT') && <PartnerUrlsProd urlsprod={this.state.urlsprod} siteType={ this.state.siteType } onUrlsProdChange={ this.onUrlsProdChange.bind(this) }/> }
       </div>
     );
   }
