@@ -5,6 +5,7 @@ class PartnerBadge extends Component {
   constructor(props) {
     super(props);
     this.state = ({
+      sitetypes : ["CART", "STORE", "IAP", "CONNECT"],
       partner : {},
       editBtn : false,
       deleteBtn : false,
@@ -50,6 +51,7 @@ class PartnerBadge extends Component {
     this.setState({ partner : statePartnerInit });
   }
   render() {
+    const listTypeOptions = this.state.sitetypes.map( type => { return( <option key={type} value={type}>{type}</option> ) });
     let WrapTag = this.props.wrapTag !== undefined ? `${this.props.wrapTag}`:'div';
     let EditBtns = this.state.editBtn || this.state.deleteBtn ?
       <div className="btn-group">
@@ -60,7 +62,9 @@ class PartnerBadge extends Component {
       this.state.showPartnerEditForm ?
         <li id="partner-editor" className="partner-badge">
           <form onSubmit={ this.onSubmit } >
-            <input name="sitetype" type="text" placeholder="CART, STORE, ..." value={ this.state.partner.sitetype } onChange={ this.updateState } />
+            <select name="sitetype" value={ this.state.partner.sitetype } onChange={ this.updateState }>
+              {listTypeOptions}
+            </select>
             <input name="name" type="text" placeholder="Name" value={ this.state.partner.name } onChange={ this.updateState } />
             <input name="logo" type="text" placeholder="Logo Url" value={ this.state.partner.logo } onChange={ this.updateState } />
             <input name="confluence" type="text" placeholder="Confluence Url" value={ this.state.partner.confluence } onChange={ this.updateState } />

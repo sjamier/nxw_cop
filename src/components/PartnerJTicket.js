@@ -4,6 +4,7 @@ class PartnerTicket extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      statusList : ["pending", "wip", "ready", "closed"],
       ticket : {
         jiranum : '',
         jiradesc : '',
@@ -20,7 +21,7 @@ class PartnerTicket extends Component {
   }
   editTicketForm(e) {
     if (!this.state.showEditTicketForm) {
-      console.log("Pre-filled Edit JIRA Ticket Form should display");
+      console.log("Pre-filled Edit JIRA Ticket Form should display - JiraStatus : "+this.props.jiraticket.jirastatus);
       const currentData = {
         jiranum : this.props.jiraticket.jiranum,
         jiradesc : this.props.jiraticket.jiradesc,
@@ -30,6 +31,7 @@ class PartnerTicket extends Component {
     } else {
       this.setState({ showEditTicketForm : false });
     }
+    console.log("state.jirastatus : "+this.state.ticket.jirastatus);
   }
   editTicket(e) {
     e.preventDefault();
@@ -61,17 +63,15 @@ class PartnerTicket extends Component {
     this.setState({ ticket : currentData });
   }
   render() {
-    let Comment = this.props.jiraticket.jiradesc !== "" ? <div className="jira-desc"><span>{this.props.jiraticket.jiradesc}</span></div> : '';
-    let EditBtn = this.props.showEditBtns ? <a className="btn btn-sign" onClick={ this.onEditClick }>{ this.state.showEditTicketForm ? 'x' : '...' }</a> : null;
-    let DeleteBtn = this.props.showDeleteBtns ? <a className="btn btn-sign lowered-sign" onClick={ this.onDeleteClick }>X</a> : null;
-    // console.log('state.showEditBtns : '+this.state.showEditBtns+'   - EditBtns : '+EditBtn);
-    // console.log('state.showDeleteBtns : '+this.state.showDeleteBtns+'   - DeleteBtns : '+DeleteBtn);
+    const statusListOptions = this.state.statusList.map( status => { return( <option key={status} value={status}>{status}</option> ) });
     return(
       this.state.showEditTicketForm ?
       <li className="ticket">
         <form className="editTicket" action="POST" onSubmit={ this.onEditTicket }>
           <input name='jiranum' className="jiranum" type="text" value={ this.state.ticket.jiranum }  onChange={ this.onUpdateStateTicket } placeholder="Number" />
-          <textarea name='jirastatus' className="jirastatus" value={ this.state.ticket.jirastatus }  onChange={ this.onUpdateStateTicket } placeholder="Status" />
+          <select name='jirastatus' className="jirastatus" value={ this.state.ticket.jirastatus }  onChange={ this.onUpdateStateTicket }>
+            {statusListOptions}
+          </select>
           <input name='jiradesc' className="jiradesc" type="text" value={ this.state.ticket.jiradesc }  onChange={ this.onUpdateStateTicket } placeholder="Short Description" />
           <input type="submit" value="OK" />
         </form>
@@ -80,10 +80,11 @@ class PartnerTicket extends Component {
       <li className="ticket">
         <a href={`https://nxwjira.nexway.com/browse/${this.props.jiraticket.jiranum}`} target="_blank" rel="noopener noreferrer">
           <div className="jira-number"><span>{this.props.jiraticket.jiranum}</span></div>
-          { Comment }
+            { (this.props.jiraticket.jiradesc !== "") && <div className="jira-desc"><span>{this.props.jiraticket.jiradesc}</span></div> }
           <div className={`jira-status ${this.props.jiraticket.jirastatus}`}></div>
         </a>
-        { EditBtn }{ DeleteBtn }
+        { this.props.showEditBtns && <a className="btn btn-sign" onClick={ this.onEditClick }>...</a> }
+        { this.props.showDeleteBtns && <a className="btn btn-sign lowered-sign" onClick={ this.onDeleteClick }>X</a> }
       </li>
     );
   }

@@ -48,7 +48,7 @@ class PartnerConnectInfos extends Component {
   componentDidMount(){
     if (this.props.connectInfos !== undefined){
       let stateCatalogs =  this.props.connectInfos.catalogs !== undefined ? stateCatalogs = this.props.connectInfos.catalogs : [];
-      let stateTerritories =  this.props.connectInfos.territories != undefined ? stateTerritories = this.props.connectInfos.territories : [];
+      let stateTerritories =  this.props.connectInfos.territories !== undefined ? stateTerritories = this.props.connectInfos.territories : [];
       console.log("stateCatalogs : "+stateCatalogs+"      - stateTerritories : "+stateTerritories);
       this.setState({ catalogs : stateCatalogs, territories: stateTerritories });
     }
@@ -59,18 +59,18 @@ class PartnerConnectInfos extends Component {
     let catalogsList = this.props.availableCatalogs
       .map( availableCatalog => {
         return( this.state.catalogs.indexOf(availableCatalog) === -1 ?
-          this.state.editMode ? <li className="clickable" onClick={ this.onCatalogClick.bind(this) }>{availableCatalog}</li> : null
+          this.state.editMode ? <li key={availableCatalog} className="clickable" onClick={ this.onCatalogClick.bind(this) }>{availableCatalog}</li> : null
           :
-          this.state.editMode ? <li className="clickable activated" onClick={ this.onCatalogClick.bind(this) }>{availableCatalog}</li> : <li className="activated">{availableCatalog}</li>
+          this.state.editMode ? <li key={availableCatalog} className="clickable activated" onClick={ this.onCatalogClick.bind(this) }>{availableCatalog}</li> : <li key={availableCatalog} className="activated">{availableCatalog}</li>
         )
       });
 
     let territoriesList = this.props.availableTerritories
       .map( availableTerritory => {
         return( this.state.territories.indexOf(availableTerritory) === -1 ?
-          this.state.editMode ? <li className="clickable" onClick={ this.onTerritoryClick.bind(this) }>{availableTerritory}</li> : null
+          this.state.editMode ? <li key={availableTerritory} className="clickable" onClick={ this.onTerritoryClick.bind(this) }>{availableTerritory}</li> : null
           :
-          this.state.editMode ? <li className="clickable activated" onClick={ this.onTerritoryClick.bind(this) }>{availableTerritory}</li> : <li className="activated">{availableTerritory}</li>
+          this.state.editMode ? <li key={availableTerritory} className="clickable activated" onClick={ this.onTerritoryClick.bind(this) }>{availableTerritory}</li> : <li key={availableTerritory} className="activated">{availableTerritory}</li>
         )
       });
 
