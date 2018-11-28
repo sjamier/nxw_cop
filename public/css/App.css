@@ -420,7 +420,7 @@ input[type="text"] {
   flex-shrink: 1; }
 
 .ticket .jira-number {
-  flex: 0 0 90px; }
+  flex: 0 0 100px; }
 .ticket .jira-status {
   flex: 0 0 65px; }
 .ticket:hover {
@@ -430,7 +430,7 @@ input[type="text"] {
     color: #222; }
 .ticket form .jiranum {
   width: 0;
-  flex: 0 0 90px; }
+  flex: 0 0 100px; }
 .ticket form .jirastatus {
   width: 0;
   flex: 1 0 50px; }
@@ -514,7 +514,7 @@ input[type="text"] {
 
   .section:not(.section-row) {
     flex-basis: 48%; }
-    .section:not(.section-row):nth-child(even) {
+    .section:not(.section-row):nth-child(even):not(:last-child) {
       margin-right: 20px; }
 
   .header img {

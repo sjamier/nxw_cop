@@ -6,11 +6,12 @@ class PartnerJTickets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      statusList : ["pending", "wip", "ready", "closed"],
       jiratickets : [],
       newTicket : {
         jiranum : '',
         jiradesc : '',
-        jirastatus : '',
+        jirastatus : 'pending',
       },
       showNewTicketForm : false,
       editMode : false,
@@ -88,21 +89,21 @@ class PartnerJTickets extends Component {
     partnerJiraTicketsSortedDesc.forEach( ticket => { if (ticket.jirastatus === 'wip') partnerJiraTicketsSorted.push(ticket) });
     partnerJiraTicketsSortedDesc.forEach( ticket => { if (ticket.jirastatus === 'ready') partnerJiraTicketsSorted.push(ticket) });
     partnerJiraTicketsSortedDesc.forEach( ticket => { if (ticket.jirastatus === 'closed') partnerJiraTicketsSorted.push(ticket) });
-    const handledStatus = 'pending wip ready closed';
-    partnerJiraTicketsSortedDesc.forEach( ticket => { if (handledStatus.indexOf(ticket.jirastatus) === -1) partnerJiraTicketsSorted.push(ticket) });
+    partnerJiraTicketsSortedDesc.forEach( ticket => { if (this.state.statusList.indexOf(ticket.jirastatus) === -1) partnerJiraTicketsSorted.push(ticket) });
     let partnerJiraTickets = partnerJiraTicketsSorted.map( (partnerJTicket,idx) => { return(<PartnerJTicket key={idx} jiraticket={partnerJTicket} showEditBtns={this.state.editMode} showDeleteBtns={this.state.deleteMode} onTicketChange={ this.onUpdateTicket } onDeleteTicket={ this.onDeleteTicket }/>); } );
     let AddBtn = <a className={ this.state.showNewTicketForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onAddTicket }>+</a>;
     let EditBtn = <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode }>...</a>;
     let DeleteBtn = <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode }>\<u>*</u>/</a>;
-    return (
+    const statusListOptions = this.state.statusList.map( status => { return( <option key={status} value={status}>{status}</option> ) });
+     return (
       <div className="section section-jtickets">
         <div className="header">
           <h3>JIRA Tickets</h3>
           { this.props.location.pathname.indexOf("/admin/") !== -1 ?
             <div className="btn-group">
               { AddBtn }
-              { JSON.stringify(this.state.jiratickets) !== "[]" ? EditBtn : null }
-              { JSON.stringify(this.state.jiratickets) !== "[]" ? DeleteBtn : null }
+              { (JSON.stringify(this.state.jiratickets) !== "[]") && EditBtn }
+              { (JSON.stringify(this.state.jiratickets) !== "[]") && DeleteBtn }
             </div>
           : null }
         </div>
@@ -111,7 +112,9 @@ class PartnerJTickets extends Component {
             <li className="ticket">
               <form className="newTicket" action="POST" onSubmit={ this.onNewTicket }>
                 <input name='jiranum' className="jiranum" type="text" value={ this.state.newTicket.jiranum }  onChange={ this.onUpdateStateTicket } placeholder="Number" />
-                <input name='jirastatus' className="jirastatus" type="text" value={ this.state.newTicket.jirastatus }  onChange={ this.onUpdateStateTicket } placeholder="Status" />
+                <select name='jirastatus' className="jirastatus" value={ this.state.newTicket.jirastatus }  onChange={ this.onUpdateStateTicket }>
+                  {statusListOptions}
+                </select>
                 <textarea name='jiradesc' className="jiradesc" value={ this.state.newTicket.jiradesc }  onChange={ this.onUpdateStateTicket } placeholder="Short Description" />
                 <input type="submit" value="OK" />
               </form>

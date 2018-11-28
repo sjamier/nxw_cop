@@ -5,12 +5,14 @@ class PartnerAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      sitetypes : ["CART", "STORE", "IAP", "CONNECT"],
       partner : {
         id : '',
         name : '',
         logo : '',
         sitetype : '',
         confluence : '',
+
       }
     }
     this.partnersFBDB = firebase.database().ref().child('partners');
@@ -49,13 +51,15 @@ class PartnerAdd extends Component {
 
   componentDidMount() {
   }
+
   render(){
-    console.log('Pass HERE ');
+    const listTypeOptions = this.state.sitetypes.map( type => { return( <option key={type} value={type}>{type}</option> ) });
     return(
       <li id="partner-breeder" className="partner-badge">
-        {/* <h3>New Onboarding Partner</h3> */}
         <form action="POST" onSubmit={ this.onSubmit }>
-          <input name="sitetype" type="text" placeholder="CART, STORE, ..." value={ this.state.partner.sitetype } onChange={ this.updateState } />
+          <select name="sitetype" value={ this.state.partner.sitetype } onChange={ this.updateState }>
+            {listTypeOptions}
+          </select>
           <input name="name" type="text" placeholder="Name" value={ this.state.partner.name } onChange={ this.updateState } />
           <input name="logo" type="text" placeholder="Logo" value={ this.state.partner.logo } onChange={ this.updateState } />
           <input name="confluence" type="text" placeholder="Confluence Url" value={ this.state.partner.confluence } onChange={ this.updateState } />

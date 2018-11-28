@@ -168,13 +168,13 @@ input[type="text"]{ padding-left: 5px;}
 .version-comment, .jira-desc, .url { font-size: 10px; color: #679; background-color: rgba(0,0,0,.04); border-left: 1px solid #fff; flex-grow: 1; flex-shrink: 1;}
 
 .ticket {
-  .jira-number { flex: 0 0 90px;}
+  .jira-number { flex: 0 0 100px;}
   .jira-status { flex: 0 0 65px;}
   &:hover { background-color: #fff; border: 1px solid #ddd;
     .jira-desc { color: #222;}
   }
   form {
-    .jiranum { width: 0; flex: 0 0 90px;}
+    .jiranum { width: 0; flex: 0 0 100px;}
     .jirastatus { width: 0; flex: 1 0 50px;}
     .jiradesc { flex: 2 1 75%;}
   }
@@ -219,7 +219,7 @@ input[type="text"]{ padding-left: 5px;}
   .btn.btn-default .btn-text { display: inline-block;}
   .sections { justify-content: space-between;}
   .section:not(.section-row) { flex-basis: 48%;
-    &:nth-child(even) { margin-right: 20px;}
+    &:nth-child(even):not(:last-child) { margin-right: 20px;}
   }
   .header img { max-width: 130%; top: -200px;}
   .partner-badge { flex-basis: 30%;}
