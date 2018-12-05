@@ -24,7 +24,7 @@ form { margin-top: 5px; flex-grow: 1; display: flex; justify-content: space-betw
   select { font-size: 12px; height: 44px; padding: 0 0 0 8px; border-radius: 0; border-width: 1px;
     option {
       &:hover { background: #000;}
-    }
+    } 
   }
   .form-group { margin: 0;}
   #partner-breeder &, #partner-editor & { margin-top: 0; flex-direction: column;}
@@ -40,7 +40,7 @@ input[type="text"]{ padding-left: 5px;}
     &.lowered-sign { font-size: 12px; padding: 9px 7px;}
     &.pushed { color: #555; @include grad-gen(#eee,#fff); box-shadow: 0 2px 2px rgba(0,0,0,.125) inset;}
   }
-  &.btn-default { color: #aaa; padding: 3px 10px;
+  &.btn-default { color: #aaa; padding: 3px 10px; box-shadow: none;
     &:hover { color: #000; background-position: 0 0;}
     .btn-text { display: none;}
   }
@@ -200,7 +200,7 @@ input[type="text"]{ padding-left: 5px;}
   .partner-badge a.partner-confluence { right: 2px; bottom: 2px;}
 }
 .displayBtns { margin-bottom: 10px;
-  > a { padding: 0 20px; background: #ddd; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,.3); cursor: pointer;}
+  > a { padding: 0 20px; margin-right: 10px; background: #ddd; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,.3); cursor: pointer;}
 }
 
 

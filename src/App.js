@@ -41,11 +41,11 @@ class App extends Component {
     .on('child_added', (snap) => {
       return new Promise((resolve, reject) => {
         this.setState({ lastPartnerKey : snap.key });
-        console.log("WillMount !! lastPartnerKey : "+this.state.lastPartnerKey);
+//        console.log('lastPartnerKey : '+this.state.lastPartnerKey);
         resolve('done');
       })
       .then((msg) => {
-        console.log('msg : '+msg);
+//        console.log('msg : '+msg);
         return new Promise((resolve, reject) => {
           let currentPartners = [];
           this.partnersFBDB.on('child_added', snap => {
@@ -61,23 +61,26 @@ class App extends Component {
           partnersData : partners,
           PartnersHTMLRoutes : partners
           .map( partner => {
-            const PartnerSection = () => { // console.log("building route for : "+partner.name);
+            const PartnerSection = () => { 
               return ( <Partner key={partner.fbdbkey} partner={partner}/> );
             }
+//            console.log("building route for : "+partner.name);
             return ( <Route key={partner.fbdbkey} path={`/nxw_cop/${partner.name.split(' ').join('')}/`} component={ PartnerSection } /> );
           })
         })
-        console.log('partnersFBDB :'+this.partnersFBDB);
-        console.log("WillMount !!    - this.state.partnersData : "+this.state.partnersData);
+//        console.log('partnersFBDB :'+this.partnersFBDB);
+//        console.log('this.state.partnersData : '+JSON.stringify(this.state.partnersData));
       })
     });
   }
 
   componentWillMount() {
+//    console.log('WillMount !!');
     this.initState();
   }
+
   render() {
-    console.log("Rendering !!");
+//    console.log("Rendering !!");
     const PartnersList = () => { return ( <Partners partners={this.state.partnersData}  onDBSyncTrigger={ this.onDBSyncTrigger.bind(this) } /> ); };
     return (
       <Router>
@@ -94,8 +97,9 @@ class App extends Component {
       </Router>
     )
   }
+
   componentDidMount() {
-    console.log("DidMount !!    - this.state.partnersData : "+this.state.partnersData);
+//    console.log('DidMount !!');
   }
 }
 

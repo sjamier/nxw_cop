@@ -47,8 +47,8 @@ class PartnerConnectInfos extends Component {
   }
   componentDidMount(){
     if (this.props.connectInfos !== undefined){
-      let stateCatalogs =  this.props.connectInfos.catalogs !== undefined ? stateCatalogs = this.props.connectInfos.catalogs : [];
-      let stateTerritories =  this.props.connectInfos.territories !== undefined ? stateTerritories = this.props.connectInfos.territories : [];
+      let stateCatalogs =  this.props.connectInfos.catalogs !== undefined ? this.props.connectInfos.catalogs : [];
+      let stateTerritories =  this.props.connectInfos.territories !== undefined ? this.props.connectInfos.territories : [];
       console.log("stateCatalogs : "+stateCatalogs+"      - stateTerritories : "+stateTerritories);
       this.setState({ catalogs : stateCatalogs, territories: stateTerritories });
     }
