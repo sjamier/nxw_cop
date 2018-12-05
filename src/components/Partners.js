@@ -46,7 +46,8 @@ class Partners extends Component {
       showNewPartnerForm : false,
       editMode : false,
       deleteMode : false,
-      displayAsGrid : true,
+      displayAsGrid : false,
+      sortAlphabetical : false
     });
     this.partnersFBDB = firebase.database().ref().child('partners');
     this.onEditedPartner = this.onEditedPartner.bind(this);
@@ -59,45 +60,31 @@ class Partners extends Component {
   onFilterTypeChange(newVal) { this.setState({ partnerTypeFilter : newVal }); }
   onFilterNameChange(newVal) { this.setState({ partnerNameFilter : newVal }); }
 
-  displayAsGrid() {
-    this.setState({displayAsGrid: true});
-    console.log("As Grid !");
-  }
+  displayAs() { this.setState({displayAsGrid: !this.state.displayAsGrid}) }
+  sortAs() { this.setState({sortAlphabetical: !this.state.sortAlphabetical}) }
 
-  displayAsList() {
-    this.setState({displayAsGrid: false});
-    console.log("As List !");
-  }
-
-  newPartnerForm(e) {
-    if (!this.state.showNewPartnerForm) {
-      // console.log("New Partner Form should display");
-      this.setState({ showNewPartnerForm : true });
-    } else {
-      this.setState({ showNewPartnerForm : false })
-    }
-  }
+  newPartnerForm(e) { this.setState({showNewPartnerForm: !this.state.showNewPartnerForm}) }
 
   onAddedPartner(newPartner) {
-    console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.sitetype :'+newPartner.sitetype+' - newPartner.versions.vurl : '+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
+ //   console.log('newPartner.id :'+newPartner.id+' - newPartner.name :'+newPartner.name+' - newPartner.logo :'+newPartner.logo+' - newPartner.sitetype :'+newPartner.sitetype+' - newPartner.versions.vurl : '+newPartner.versions.vurl+' - newPartner.versions.vstatus :'+newPartner.versions.vstatus);
     newPartner.lastupdate = this.state.today.format("DD.MM.YYYY");
     this.partnersFBDB.push(newPartner);
     this.setState({ showNewPartnerForm : false })
   }
 
   onEditedPartner(editedPartner) {
-    console.log('about to write updated partner to firebdb : '+JSON.stringify(editedPartner));
+//    console.log('about to write updated partner to firebdb : '+JSON.stringify(editedPartner));
     this.props.onDBSyncTrigger(editedPartner, 'edit')
   }
 
   onDeletedPartner(deletedPartner) {
-    console.log('about to delete partner from firebdb : '+JSON.stringify(deletedPartner));
+//    console.log('about to delete partner from firebdb : '+JSON.stringify(deletedPartner));
     this.props.onDBSyncTrigger(deletedPartner, 'delete')
   }
 
   componentWillMount() {
-    console.log("this.props.partners : "+this.props.partners);
-    console.log("this.props.location : "+JSON.stringify(this.props.location));
+//    console.log("this.props.partners : "+this.props.partners);
+//    console.log("this.props.location : "+JSON.stringify(this.props.location));
     this.setState({ partners : this.props.partners });
   }
 
@@ -108,36 +95,39 @@ class Partners extends Component {
     const filteredPartners = this.state.partners
       .filter( partner => { return this.state.partnerTypeFilter === "ALL" ? partner : partner.sitetype === this.state.partnerTypeFilter; })
       .filter( partner => { return this.state.partnerNameFilter === "" ? partner : partner.name.toLowerCase().includes(this.state.partnerNameFilter.toLowerCase()); })
-    const PartnersBadgesRecent = filteredPartners
+    const filteredPartnersABSorted = [...filteredPartners]
+      .sort((a,b) => { return a.name > b.name ? 1 : -1}); 
+
+    const PartnersBadgesRecent = (this.state.sortAlphabetical ? filteredPartnersABSorted : filteredPartners)
       .filter( partner => { return moment(partner.lastupdate,'DD MM YYYY').isAfter(this.state.today.clone().subtract(30,'days')); })
       .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
-    const PartnersBadgesWip = filteredPartners
+    const PartnersBadgesWip = (this.state.sortAlphabetical ? filteredPartnersABSorted : filteredPartners)
       .filter( partner => {
-        var isWip = false;
+        let isWip = false;
         if ( partner.jiratickets !== undefined ) {
           partner.jiratickets.forEach( jticket => { if (jticket.jirastatus === "wip") isWip = true ;})
         }
         return isWip;
       })
       .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
-    const PartnersBadgesProd = filteredPartners
+    const PartnersBadgesProd = (this.state.sortAlphabetical ? filteredPartnersABSorted : filteredPartners)
       .filter( partner => { return ( partner.urlsprod !== undefined ? true : false);})
       .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
-    const PartnersBadgesAll = filteredPartners
+    const PartnersBadgesAll = (this.state.sortAlphabetical ? filteredPartnersABSorted : filteredPartners)
       .map( partner => { return ( <PartnerBadge key={partner.fbdbkey} partner={partner} wrapTag="li" clickable={true} editMode={this.state.editMode} deleteMode={this.state.deleteMode} onEdited={ this.onEditedPartner } onDeleted={ this.onDeletedPartner }/> ); });
-    console.log("NbResults: "+PartnersBadgesAll.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
+//    console.log("NbResults: "+PartnersBadgesAll.length+"   - this.state.partnerTypes : "+this.state.partnerTypes);
 
     return (
       <div className="section section-row section-partners">
         <div className="header">
           <h3>Partners</h3>
-          { this.props.location.pathname === "/nxw_cop/admin/" ?
+            { this.props.location.pathname === "/nxw_cop/admin/" &&
               <div className="btn-group">
                 <a className={ this.state.showNewPartnerForm ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.newPartnerForm.bind(this) }>+</a>
                 <a className={ this.state.editMode ? 'btn btn-sign pushed' : 'btn btn-sign' } onClick={ this.onEditMode.bind(this) }>...</a>
                 <a className={ this.state.deleteMode ? 'btn btn-sign lowered-sign pushed' : 'btn btn-sign lowered-sign' } onClick={ this.onDeleteMode.bind(this) }>\<u>*</u>/</a>
               </div>
-            : null }
+            }
             <span className="date">{this.state.today.format('DD.MM.YYYY')}</span>
         </div>
         <div id="partners" className="partners">
@@ -149,13 +139,13 @@ class Partners extends Component {
             </form>
           </div>
           <div className="displayBtns">
-            {this.state.displayAsGrid &&  <a className="displayAsList" onClick={ this.displayAsList.bind(this)}>Display as List</a>}
-            {!this.state.displayAsGrid &&  <a className="displayAsGrid" onClick={ this.displayAsGrid.bind(this)}>Display as Grid</a>}
+            <a onClick={this.displayAs.bind(this)}>{this.state.displayAsGrid ? 'Display as List' : 'Display as Grid'}</a>
+            <a onClick={this.sortAs.bind(this)}>{this.state.sortAlphabetical ? 'Sort by Date Entry' : 'Sort Alphabetically'}</a>
           </div>
-          <div className={this.state.displayAsGrid?"partners-lists displayAsGrid":"partners-lists displayAsList"}>
+          <div className={this.state.displayAsGrid ? 'partners-lists displayAsGrid' : 'partners-lists displayAsList'}>
             <ul className="partners-recent">
               <li className="list-separator">New/Recent Updates (30 days)</li>
-              { this.state.showNewPartnerForm ? <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> : null }
+              { this.state.showNewPartnerForm && <PartnerAdd onPartnerAdded={ this.onAddedPartner.bind(this) } /> }
               { PartnersBadgesRecent }
             </ul>
             <ul className="partners-progress">
@@ -175,9 +165,9 @@ class Partners extends Component {
       </div>
     );
   }
-  // componentDidMount() {}
+
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps.partners : "+nextProps.partners);
+//    console.log("nextProps.partners : "+nextProps.partners);
     this.setState({ partners : nextProps.partners });
   }
 }
